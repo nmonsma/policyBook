@@ -1,0 +1,120 @@
+:root {
+  --color1: #373;
+  --color1text: white;
+  --color2: #d99;
+  --color2text: black;
+}
+
+body {
+    margin: 0 auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    margin: 0 auto;
+    top: 0;
+    padding: 5px;
+    width: 100vw;
+    position: fixed;
+    background-color: var(--color1);
+    color: var(--color1text);
+    user-select: none;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+}
+
+select {
+  padding: 4px;
+  border-radius: 5px;
+  margin: 3px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  width: 1em;
+  height: 1em;
+  border: none;
+  border-radius: 0.1em;
+  transform: translateY(0.1em);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--color2);
+}
+
+#main {
+    margin-top: 50px;
+}
+
+div {
+  margin: 5px;
+}
+
+span {
+  padding: 0 5px 0 0;
+}
+
+.heading {
+  background-color: var(--color1);
+  color: var(--color1text);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  max-width: 800px;
+}
+
+.section-title {
+  margin-left: 2vw;
+}
+
+.policy {
+  margin-left: 4vw;
+  max-width: 800px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 0 15px;
+}
+
+.policy-title {
+  font-weight: 800;
+}
+
+.status-approved {
+  border-color: var(--color1)
+}
+
+@media only screen and (min-width: 950px) {
+  header {
+      top: 0;
+      height: 100vh;
+      padding: 25px 10px;
+      width: 20vw;
+      min-width: 150px;
+      position: fixed;
+      background-color: var(--color1);
+      color: var(--color1text);
+      user-select: none;
+  }
+
+  #main {
+      margin-top: 25px;
+      margin-left: 25vw;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #subset {
+    width: 18vw;
+    min-width: 150px;
+  }
+
+}
