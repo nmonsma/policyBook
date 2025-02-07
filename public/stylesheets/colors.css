@@ -1,0 +1,15 @@
+:root {
+  --color0: #f8f7f7;  
+  --color1: #eee2cd;
+  --color1text: black;
+  --color2: #edc7b7;
+  --color2text: black;
+  --color3: #bab2b5;
+  --color3text:black;
+  --color4: #123c69;
+  --color4complement: #b0bfcf;
+  --color4text: white;
+  --color5: #ac3b61;
+  --color5text: white;
+  --dark: #2e292b;
+}

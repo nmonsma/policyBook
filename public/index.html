@@ -12,6 +12,9 @@
     </head>
 <body>
     <header>
+        <h1>Policy Repository</h1>
+    </header>
+    <div class="sidebar">
         <form onsubmit="false">
             Subset:
             <select id="subset">
@@ -25,27 +28,42 @@
             <br>
             Display Options:
             <div>
-                <input type="checkbox" id="policy-numbers" name="policy-numbers" checked>
-                <label for="policy-numbers">Policy Numbers</label>
+                <input class="sidebar-checkbox" type="checkbox" id="areas-checkbox" name="areas-checkbox" checked>
+                <label for="areas-checkbox">Area Headings</label>
             </div>
             <div>
-                <input type="checkbox" id="headings" name="headings" checked>
-                <label for="heading">Headings</label>
+                <input class="sidebar-checkbox" type="checkbox" id="sections-checkbox" name="sections-checkbox" checked>
+                <label for="sections-checkbox">Section Headings</label>
             </div>
             <div>
-                <input type="checkbox" id="approval-info" name="approval-info" checked>
-                <label for="approval-info">Approval Information</label>
+                <input class="sidebar-checkbox" type="checkbox" id="policy-numbers-checkbox" name="policy-numbers-checkbox" checked>
+                <label for="policy-numbers-checkbox">Policy Numbers</label>
+            </div>
+            <div>
+                <input class="sidebar-checkbox" type="checkbox" id="audiences-checkbox" name="audiences-checkbox" checked>
+                <label for="audiences-checkbox">Audiences</label>
+            </div>
+            <div>
+                <input class="sidebar-checkbox" type="checkbox" id="content-checkbox" name="content-checkbox" checked>
+                <label for="content-checkbox">Policy Paragraphs</label>
+            </div>
+            <div>
+                <input class="sidebar-checkbox" type="checkbox" id="approval-info-checkbox" name="approval-info-checkbox" checked>
+                <label for="approval-info-checkbox">Approval Information</label>
             </div>
             <div></div>
         </form>
-    </header>
+    </div>
     <main id="main">
-        <!-- <div class="heading area-title">1 Governance</div>
+        <!-- 
+        <div class="heading area-title">1 Governance</div>
         <div class="heading section-title">1000 Founding Document</div>
         <div class="policy status-undefined audience-E audience-PS audience-S">
-            <p></p>
+            <p class="heading"><span class="policy-number"></span><span class="policy-title"></span><span class="policy-audience"></span></p>
+            <p class="content"></p>
             <p class="approval">Approved July 4, 1776 by Continental Congress</p>
-        </div> -->
+        </div>
+         -->
 
     </main>
     </body>
@@ -238,8 +256,14 @@ for (let selectedArea=0; selectedArea<policyBook.areas.length; selectedArea++) {
     //Create and Add Area Title
     const createdAreaDiv = document.createElement('div');
     //Add content from json:
-    createdAreaDiv.innerText = `${policyBook.areas[selectedArea].area} ${policyBook.areas[selectedArea].title}`;
-    createdAreaDiv.classList.add('heading', 'area-title');
+        const createdNumberSpan = document.createElement('span');
+        const createdTitleSpan = document.createElement('span');
+        createdNumberSpan.innerText = `${policyBook.areas[selectedArea].area}`;
+        createdNumberSpan.classList.add('policy-number');
+        createdTitleSpan.innerText = `${policyBook.areas[selectedArea].title}`;
+    createdAreaDiv.appendChild(createdNumberSpan);
+    createdAreaDiv.appendChild(createdTitleSpan);      
+    createdAreaDiv.classList.add('divider', 'area-title');
     main.appendChild(createdAreaDiv);
     
     //Iterate through sections
@@ -249,8 +273,15 @@ for (let selectedArea=0; selectedArea<policyBook.areas.length; selectedArea++) {
         //Create and Add Section Title
         const createdSectionDiv = document.createElement('div');
         //Add content from json
-        createdSectionDiv.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].section} ${policyBook.areas[selectedArea].sections[selectedSection].title}`;
-        createdSectionDiv.classList.add('heading', 'section-title');
+            const createdNumberSpan = document.createElement('span');
+            const createdTitleSpan = document.createElement('span');
+            createdNumberSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].section}`;
+            createdNumberSpan.classList.add('policy-number');
+            createdTitleSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].title}`;
+        createdSectionDiv.appendChild(createdNumberSpan);
+        createdSectionDiv.appendChild(createdTitleSpan);      
+
+        createdSectionDiv.classList.add('divider', 'section-title');
         main.appendChild(createdSectionDiv);
 
         //Iterate through policies
@@ -260,24 +291,45 @@ for (let selectedArea=0; selectedArea<policyBook.areas.length; selectedArea++) {
             //Create Policy Div
             const createdDiv = document.createElement('div');
             
-            //Create and Add Policy Header with #### Title
-            const headerParagraph = document.createElement('p');
+            //Create and Add Policy Header with #### Title Audience
+            const headingParagraph = document.createElement('p');
             
-            const numberSpan = document.createElement('span');
-            numberSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].policy}`;
-            numberSpan.classList.add('policy-number');
-            headerParagraph.appendChild(numberSpan);
-            
-            const titleSpan = document.createElement('span');
-            titleSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].title}`;
-            titleSpan.classList.add('policy-title');
-            headerParagraph.appendChild(titleSpan);
+                //Add policy number
+                const numberSpan = document.createElement('span');
+                numberSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].policy}`;
+                numberSpan.classList.add('policy-number');
+                headingParagraph.appendChild(numberSpan);
+                
+                //Add policy title
+                const titleSpan = document.createElement('span');
+                titleSpan.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].title}`;
+                titleSpan.classList.add('policy-title');
+                headingParagraph.appendChild(titleSpan);
+                
+                //Add audiences
+                const audienceSpan = document.createElement('span');
+                    //If the current policy has audiences listed, add those:
+                    if (policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].hasOwnProperty('audience')) {
+                        for (q=0;q<policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].audience.length;q++) {
+                            const audience = policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].audience[q]; 
+                            createdDiv.classList.add(`audience-${audience}`);
+                            audienceSpan.innerText += ` ${audience}`;
+                        }
+                    } else {
+                        createdDiv.classList.add('audience-E', 'audience-PS', 'audience-S');
+                        audienceSpan.innerText = ` E PS S`;
+                    }
+                audienceSpan.classList.add('policy-audience');
+                headingParagraph.appendChild(audienceSpan);
 
-            createdDiv.appendChild(headerParagraph);
+            headingParagraph.classList.add('heading');
+
+            createdDiv.appendChild(headingParagraph);
 
             //Create and Add Policy Content
             const contentParagraph = document.createElement('p');
             contentParagraph.innerText = `${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].content}`;
+            contentParagraph.classList.add('content');
             createdDiv.appendChild(contentParagraph);
 
             //Create and Add Footer with Adopted ####-##-## by *
@@ -291,14 +343,7 @@ for (let selectedArea=0; selectedArea<policyBook.areas.length; selectedArea++) {
 
             createdDiv.classList.add('policy', `status-${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].status}`);
             
-            //If the current policy has audiences listed, add those:
-            if (policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].hasOwnProperty('audience')) {
-                for (q=0;q<policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].audience.length;q++) {
-                    createdDiv.classList.add(`audience-${policyBook.areas[selectedArea].sections[selectedSection].policies[selectedPolicy].audience[q]}`);
-                }
-            } else {
-                createdDiv.classList.add('audience-E', 'audience-PS', 'audience-S');
-            }
+
 
 }}}
 
@@ -306,5 +351,5 @@ for (let selectedArea=0; selectedArea<policyBook.areas.length; selectedArea++) {
 
 
 </script>
-
+<script src="javascripts/viewactions.js"></script>
 </html>

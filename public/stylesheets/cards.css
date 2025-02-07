@@ -1,0 +1,70 @@
+.divider, .policy {
+  margin: 5px;
+  box-shadow: 0 0 3px 0 rgba(0,0,0,.1);
+}
+
+.policy {
+  background-color: white;
+}
+
+span {
+  padding: 0 5px 0 0;
+  margin: 0;
+}
+
+.divider {
+  background-image: linear-gradient(to right, var(--color1), var(--color2));
+  color: var(--color3text);
+  padding: 5px;
+  font-weight: 800;
+}
+
+.section-title {
+  margin-left: 2vw;
+}
+
+.policy {
+  margin-left: 4vw;
+  max-width: 800px;
+  padding: 0;
+}
+
+  .heading {
+    background-color: var(--color1);
+    color: var(--color1text);
+    padding: 5px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+
+  .policy-title {
+    font-weight: 800;
+  }
+
+
+  .content {
+    padding: 0 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .approval {
+    background-color: var(--color1);
+    color: var(--color1text);
+    padding: 5px;
+    margin: 0;
+  }
+
+  .status-not-approved {
+    background-color: var(--not-approved)
+  }
+
+.hidden {
+  display: none;
+  user-select: none;
+
+}
