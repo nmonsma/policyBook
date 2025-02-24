@@ -13,7 +13,7 @@ span {
 }
 
 .divider {
-  background-image: linear-gradient(to right, var(--color1), var(--color2));
+  background-image: linear-gradient(to right, var(--color2), var(--color1));
   color: var(--color3text);
   padding: 5px;
   font-weight: 800;
