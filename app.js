@@ -19,6 +19,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//MySQL Setup
+const mysql = require('mysql')
+const dbConnection = mysql.createConnection({
+  host: 'policytesting.eastpalmyrachristianschool.com',
+  user: 'epcspolicy',
+  password: 'nqQ*j8xn0a3wSomZH3',
+  database: 'policytesting'
+})
+
+//Connect to MySQL
+dbConnection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to MySQL Database!');
+});
+
+//Create Routes
+app.get('/allPolicies', (req, res) => {
+  dbConnection.query('SELECT * FROM policies', (err, result) => {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -38,24 +61,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// //MySQL Setup
-// const mysql = require('mysql')
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'dbuser',
-//   password: 's3kreee7',
-//   database: 'my_db'
-// })
-
-// connection.connect()
-
-// connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-//   if (err) throw err
-
-//   console.log('The solution is: ', rows[0].solution)
-// })
-
-// connection.end()
-
-
 module.exports = app;
+
+
+
+
