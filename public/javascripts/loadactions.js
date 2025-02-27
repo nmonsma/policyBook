@@ -4,35 +4,71 @@ let policyTable = [];
 //Fetch Requests
 //Get JSON from database
 const loadPolicyTable = async ()=> {
+    currentArea = 0;
+    currentSection = 0;
     const request = await fetch('/allPolicies'); //This get route returns the entire Policy Table.
     try {
         const policyTable = await request.json();
         console.log(policyTable);
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
-            console.log (`Policy: ${selectedPolicyIndex}`);
-        
+            //If the policy in a new area and/or new section, add an area and section header
+            if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentArea) {
+                currentArea = Math.floor(policyTable[selectedPolicyIndex].section_number/1000);
+                //Create Area Header
+                const createdAreaDiv = document.createElement('div');
+                //Add content from policyTable:
+                const createdNumberSpan = document.createElement('span');
+                const createdTitleSpan = document.createElement('span');
+                createdNumberSpan.innerText = `${currentArea}`;
+                createdNumberSpan.classList.add('policy-number');
+                createdTitleSpan.innerText = `(area titles need to be looked up in separate db table)`;
+                createdAreaDiv.appendChild(createdNumberSpan);
+                createdAreaDiv.appendChild(createdTitleSpan);      
+                createdAreaDiv.classList.add('divider', 'area-title');
+                main.appendChild(createdAreaDiv);
+              
+            }
+
+            if(policyTable[selectedPolicyIndex].section_number != currentSection) {
+                currentSection = policyTable[selectedPolicyIndex].section_number;
+                //Create Section Header
+                const createdSectionDiv = document.createElement('div');
+                //Add content from policyTable
+                const createdNumberSpan = document.createElement('span');
+                const createdTitleSpan = document.createElement('span');
+                createdNumberSpan.innerText = `${currentSection}`;
+                createdNumberSpan.classList.add('policy-number');
+                createdTitleSpan.innerText = `(section titles need to be looked up in separate db table)`;
+                createdSectionDiv.appendChild(createdNumberSpan);
+                createdSectionDiv.appendChild(createdTitleSpan);      
+    
+                createdSectionDiv.classList.add('divider', 'section-title');
+                main.appendChild(createdSectionDiv);
+              
+            }
+
             //Create Policy Div
             const createdDiv = document.createElement('div');
             
             //Create and Add Policy Header with #### Title Audience
-            const headingParagraph = document.createElement('p');
+            const headingParagraph = document.createElement('h4');
             
                 //Add policy number
                 const numberSpan = document.createElement('span');
-                numberSpan.innerText = `${policyTable[selectedPolicyIndex].policy_number}`;
+                numberSpan.innerText = `${policyTable[selectedPolicyIndex].policy_number}\u2003`;
                 numberSpan.classList.add('policy-number');
                 headingParagraph.appendChild(numberSpan);
                 
                 //Add policy title
                 const titleSpan = document.createElement('span');
-                titleSpan.innerText = `${policyTable[selectedPolicyIndex].title}`;
+                titleSpan.innerText = `${policyTable[selectedPolicyIndex].title}\u2002`;
                 titleSpan.classList.add('policy-title');
                 headingParagraph.appendChild(titleSpan);
                 
                 //Add audiences
                 const audienceSpan = document.createElement('span');
-                audienceSpan.innerText = `${policyTable[selectedPolicyIndex].audiences}`;
+                audienceSpan.innerText = ` (${policyTable[selectedPolicyIndex].audiences})`;
                 audienceSpan.classList.add('policy-audience');
                 headingParagraph.appendChild(audienceSpan);
         
@@ -56,6 +92,9 @@ const loadPolicyTable = async ()=> {
             main.appendChild(createdDiv); 
 
             createdDiv.classList.add('policy', `status-${policyTable[selectedPolicyIndex].status}`);
+            if(Math.floor(currentSection/1000)==currentSection/1000) {
+                createdDiv.classList.add('board-policy');
+            }
         }
 
 

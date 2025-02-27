@@ -12,4 +12,7 @@
   --color5: #ac3b61;
   --color5text: white;
   --dark: #2e292b;
+  --not-approved: var(--color2);
+  --board-policy: var(--color1);
+  --approved: white;
 }

@@ -5,8 +5,12 @@ body {
     margin: 0 auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--dark);
-    background-color: var(--color1);  
+    background-color: var(--color0);  
 
+}
+
+h1, h2, h3, h4 {
+  appearance: none;
 }
 
 br {
@@ -44,7 +48,7 @@ header h1{
   color: var(--color3text);
   user-select: none;
   /* box-shadow: 2px 2px 5px 0 rgba(46,41,43,.3); */
-  background-image: conic-gradient(at 75% 0, var(--color3), var(--color2), var(--color1), var(--color3));
+  background-image: conic-gradient(at -15% 30%, var(--color3), var(--color2), var(--color1), var(--color3));
 }
 
 form {
@@ -78,6 +82,7 @@ input[type="checkbox"]:checked {
 
 #main {
     margin-top: 75px;
+    padding: 0;
 }
 
 
