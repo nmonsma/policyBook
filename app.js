@@ -22,10 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //MySQL Setup
 const mysql = require('mysql')
 const dbConnection = mysql.createConnection({
-  host: 'policytesting.eastpalmyrachristianschool.com',
+  host: 'policy.eastpal.org',
   user: 'epcspolicy',
   password: 'nqQ*j8xn0a3wSomZH3',
-  database: 'policytesting'
+  database: 'policyrepository'
 })
 
 //Connect to MySQL
