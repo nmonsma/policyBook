@@ -43,21 +43,21 @@ app.get('/allPolicies', (req, res) => {
 });
 
 app.get('/employeePolicies', (req, res) => {
-  dbConnection.query('SELECT * FROM policies WHERE employee IS NOT NULL ORDER BY policy_number', (err, result) => {
+  dbConnection.query('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', (err, result) => {
     if (err) throw err;
     res.json(result);
   });
 });
 
 app.get('/familyPolicies', (req, res) => {
-  dbConnection.query('SELECT * FROM policies WHERE family IS NOT NULL ORDER BY policy_number', (err, result) => {
+  dbConnection.query('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', (err, result) => {
     if (err) throw err;
     res.json(result);
   });
 });
 
 app.get('/extracurricularPolicies', (req, res) => {
-  dbConnection.query('SELECT * FROM policies WHERE extracurricular IS NOT NULL ORDER BY policy_number', (err, result) => {
+  dbConnection.query('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', (err, result) => {
     if (err) throw err;
     res.json(result);
   });

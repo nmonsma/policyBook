@@ -8,6 +8,13 @@ const formAssociations = [
     {"checkbox": "approval-info-checkbox",  "cssClass": "approval"}
 ]
 
+const handbookAssociations = [
+    {"dropdown": "All", "route": "allPolicies"},
+    {"dropdown": "Employee", "route": "employeePolicies"},
+    {"dropdown": "Family", "route": "familyPolicies"},
+    {"dropdown": "Extracurricular", "route": "extracurricularPolicies"}
+]
+
 function showHide() {
     //Find the css class associated with the option selected and toggle the hidden class to all elements of that css class.
 
@@ -27,6 +34,28 @@ function showHide() {
     }
 
 }
+
+
+//This function was AI generated and needs to be checked:
+function showHideHandbook() {
+
+    let route = '';
+    console.log(this.value);
+
+    for (const item of handbookAssociations) {
+        if (item.dropdown == this.value) {
+            route = item.route
+        }
+    }
+    //Make a request to the server for the appropriate policies
+    fetch(`/${route}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            //Update the page with the new data
+        })
+}
+
 
 //Attach Event Listeners
 for (const object of document.getElementsByClassName('sidebar-checkbox')) {

@@ -3,10 +3,10 @@ let policyTable = [];
 
 //Fetch Requests
 //Get JSON from database
-const loadPolicyTable = async ()=> {
+const loadPolicyTable = async (route)=> {
     currentArea = 0;
     currentSection = 0;
-    const request = await fetch('/allPolicies'); //This get route returns the entire Policy Table.
+    const request = await fetch(route); //Get the table json from the specified route.
     try {
         const policyTable = await request.json();
         console.log(policyTable);
@@ -167,6 +167,6 @@ const main = document.getElementById('main');
 
 //Main Actions
 //Update policyTable
-loadPolicyTable();
+loadPolicyTable('extracurricularPolicies');
 //Iterate through rows
 
