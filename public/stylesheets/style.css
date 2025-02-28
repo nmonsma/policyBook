@@ -5,7 +5,7 @@ body {
     margin: 0 auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--dark);
-    background-color: var(--color0);  
+    background-color: var(--color1);  
 
 }
 
@@ -24,8 +24,8 @@ header {
     padding: 10px;
     width: 100vw;
     position: fixed;
-    background-color: var(--color4);
-    color: var(--color4text);
+    background-color: var(--color5);
+    color: var(--color5text);
     user-select: none;
     z-index: 100;
     box-shadow: 0 3px 3px rgba(0,0,0,0.5)

@@ -3,7 +3,7 @@ const formAssociations = [
     {"checkbox": "areas-checkbox",          "cssClass": "area-title"},
     {"checkbox": "sections-checkbox",       "cssClass": "section-title"},
     {"checkbox": "policy-numbers-checkbox", "cssClass": "policy-number"},
-    {"checkbox": "audiences-checkbox",      "cssClass": "policy-audience"},
+    {"checkbox": "handbooks-checkbox",      "cssClass": "policy-handbook"},
     {"checkbox": "content-checkbox",        "cssClass": "content"},
     {"checkbox": "approval-info-checkbox",  "cssClass": "approval"}
 ]

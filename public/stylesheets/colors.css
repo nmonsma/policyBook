@@ -1,18 +1,19 @@
 :root {
-  --color0: #f8f7f7;  
-  --color1: #eee2cd;
+  --color0: #ffffff;  
+  --color1: #f8f8f8;
   --color1text: black;
-  --color2: #edc7b7;
+  --color2: #ffccbc;
   --color2text: black;
-  --color3: #bab2b5;
+  --color3: #d3e3fc;
   --color3text:black;
-  --color4: #123c69;
-  --color4complement: #b0bfcf;
+  --color4: #77a6f7;
+  --color4complement: white;
   --color4text: white;
-  --color5: #ac3b61;
+  --color5: #00887a;
   --color5text: white;
-  --dark: #2e292b;
+  --dark: black;
+  --darktext: white;
   --not-approved: var(--color2);
-  --board-policy: var(--color1);
+  --board-policy: var(--color3);
   --approved: white;
 }

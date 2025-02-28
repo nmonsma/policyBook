@@ -50,10 +50,11 @@ const loadPolicyTable = async ()=> {
 
             //Create Policy Div
             const createdDiv = document.createElement('div');
+            createdDiv.id = `${policyTable[selectedPolicyIndex].policy_number}`;
             
-            //Create and Add Policy Header with #### Title Audience
+            //Create and Add Policy Header with #### Title handbook
             const headingParagraph = document.createElement('h4');
-            
+
                 //Add policy number
                 const numberSpan = document.createElement('span');
                 numberSpan.innerText = `${policyTable[selectedPolicyIndex].policy_number}\u2003`;
@@ -66,11 +67,29 @@ const loadPolicyTable = async ()=> {
                 titleSpan.classList.add('policy-title');
                 headingParagraph.appendChild(titleSpan);
                 
-                //Add audiences
-                const audienceSpan = document.createElement('span');
-                audienceSpan.innerText = ` (${policyTable[selectedPolicyIndex].audiences})`;
-                audienceSpan.classList.add('policy-audience');
-                headingParagraph.appendChild(audienceSpan);
+                //Add handbooks
+                const handbookSpan = document.createElement('span');
+                if (policyTable[selectedPolicyIndex].handbook_e) {
+                    const handbookE = document.createElement('span');
+                    handbookE.innerText = 'E';
+                    handbookE.classList.add('handbook-e');
+                    handbookSpan.appendChild(handbookE);
+                }
+                if (policyTable[selectedPolicyIndex].handbook_f) {
+                    const handbookF = document.createElement('span');
+                    handbookF.innerText = 'F';
+                    handbookF.classList.add('handbook-f');
+                    handbookSpan.appendChild(handbookF);
+                }
+                if (policyTable[selectedPolicyIndex].handbook_x) {
+                    const handbookX = document.createElement('span');
+                    handbookX.innerText = 'X';
+                    handbookX.classList.add('handbook-x');
+                    handbookSpan.appendChild(handbookX);
+                }
+
+                handbookSpan.classList.add('policy-handbook');
+                headingParagraph.appendChild(handbookSpan);
         
             headingParagraph.classList.add('heading');
         
@@ -116,7 +135,7 @@ const loadPolicyTable = async ()=> {
 //         "status": "approved",
 //         "entity": "Board",
 //         "date": "2024-10-08 00:00:00",
-//         "audiences": "F"
+//         "handbooks": "F"
 //     },
 //     {
 //         "policy_id": 47,
@@ -127,7 +146,7 @@ const loadPolicyTable = async ()=> {
 //         "status": "approved",
 //         "entity": "Board",
 //         "date": "2024-10-08 00:00:00",
-//         "audiences": "F"
+//         "handbooks": "F"
 //     },
 //     {
 //         "policy_id": 48,
@@ -138,7 +157,7 @@ const loadPolicyTable = async ()=> {
 //         "status": "approved",
 //         "entity": "Board",
 //         "date": "2024-10-08 00:00:00",
-//         "audiences": "S"
+//         "handbooks": "S"
 //     }
 // ]
 

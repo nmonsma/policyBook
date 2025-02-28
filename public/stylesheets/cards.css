@@ -29,19 +29,47 @@ span {
   .heading {
     padding: 15px;
     margin: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    height: 20px;
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-areas: "number title handbooks";
     border-bottom: 1px solid rgba(0,0,0,.1);
   }
 
-
-
   .policy-title {
     font-weight: 800;
+    grid-area: title;
   }
 
+  .policy-handbook {
+    grid-area: handbooks;
+    text-align: right;
+    padding-right: 15px;
+  }
+
+  .handbook-e, .handbook-f, .handbook-x {
+    font-size: 0.8em;
+    padding: 4px 6px;
+    margin: 0 4px;
+    font-family:'Courier New', Courier, monospace;  
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 2px 0.5px rgba(0,0,0,.3), inset -1px -1px 2px 0.5px rgba(255,255,255,1);
+  }
+
+  .handbook-e {
+    background-color: var(--color4);
+    color: var(--color4text);
+  }
+
+  .handbook-f {
+    background-color: var(--color5);
+    color: var(--color5text);
+  }
+
+  .handbook-x {
+    background-color: var(--dark);
+    color: var(--darktext);
+  }
 
   .content {
     padding: 15px;
@@ -64,6 +92,10 @@ span {
   .board-policy {
     background-color: var(--board-policy)
   }
+
+.policy:not(.status-approved) .content {
+  background-color: var(--not-approved);
+}
   
 .hidden {
   display: none;
