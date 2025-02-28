@@ -37,27 +37,26 @@ function showHide() {
 
 
 //This function was AI generated and needs to be checked:
-function showHideHandbook() {
-
+function loadHandbook() {
     let route = '';
-    console.log(this.value);
-
-    for (const item of handbookAssociations) {
-        if (item.dropdown == this.value) {
-            route = item.route
-        }
-    }
-    //Make a request to the server for the appropriate policies
-    fetch(`/${route}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            //Update the page with the new data
-        })
+    
+    //Call loadPolicyTable from loadactions.js with the route associated with the selected handbook
+    loadPolicyTable(this.value);
 }
 
+//Create Handbook options from the handbookSelectors array
+const handbookSelector = document.getElementById('handbook-selector');
+for (const item of handbookAssociations) {
+    const option = document.createElement('option');
+    option.value = item.route;
+    option.text = item.dropdown;
+    handbookSelector.appendChild(option);
+}
 
 //Attach Event Listeners
 for (const object of document.getElementsByClassName('sidebar-checkbox')) {
     object.addEventListener('click', showHide); 
+}
+for (const item of handbookAssociations) {
+    document.getElementById('handbook-selector').addEventListener('change', loadHandbook);
 }

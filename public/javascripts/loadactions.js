@@ -4,12 +4,14 @@ let policyTable = [];
 //Fetch Requests
 //Get JSON from database
 const loadPolicyTable = async (route)=> {
+    //Clear Policy Table
+    main.textContent = '';
+    //Reset current area and section
     currentArea = 0;
     currentSection = 0;
     const request = await fetch(route); //Get the table json from the specified route.
     try {
-        const policyTable = await request.json();
-        console.log(policyTable);
+        const policyTable = await request.json(); //Convert the response to JSON
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
             //If the policy in a new area and/or new section, add an area and section header
@@ -21,13 +23,13 @@ const loadPolicyTable = async (route)=> {
                 const createdNumberSpan = document.createElement('span');
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentArea}`;
+                createdNumberSpan.id = `${currentArea}`;
                 createdNumberSpan.classList.add('policy-number');
                 createdTitleSpan.innerText = `(area titles need to be looked up in separate db table)`;
                 createdAreaDiv.appendChild(createdNumberSpan);
                 createdAreaDiv.appendChild(createdTitleSpan);      
                 createdAreaDiv.classList.add('divider', 'area-title');
-                main.appendChild(createdAreaDiv);
-              
+                main.appendChild(createdAreaDiv); 
             }
 
             if(policyTable[selectedPolicyIndex].section_number != currentSection) {
@@ -38,6 +40,7 @@ const loadPolicyTable = async (route)=> {
                 const createdNumberSpan = document.createElement('span');
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentSection}`;
+                createdNumberSpan.id = `${currentSection}`;
                 createdNumberSpan.classList.add('policy-number');
                 createdTitleSpan.innerText = `(section titles need to be looked up in separate db table)`;
                 createdSectionDiv.appendChild(createdNumberSpan);
@@ -167,6 +170,6 @@ const main = document.getElementById('main');
 
 //Main Actions
 //Update policyTable
-loadPolicyTable('extracurricularPolicies');
+loadPolicyTable('allPolicies');
 //Iterate through rows
 

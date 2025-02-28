@@ -53,7 +53,7 @@ span {
     margin: 0 4px;
     font-family:'Courier New', Courier, monospace;  
     border-radius: 5px;
-    box-shadow: inset 1px 1px 2px 0.5px rgba(0,0,0,.3), inset -1px -1px 2px 0.5px rgba(255,255,255,1);
+    box-shadow: 1px 1px 2px 0.5px rgba(0,0,0,.3), -1px -1px 2px 0.5px rgba(255,255,255,1);
   }
 
   .handbook-e {

@@ -57,10 +57,11 @@ form {
 }
 
 select {
-  padding: 4px;
+  padding: 5px;
   margin: 3px;
+  width: 85%;
   border: none;
-  border-radius: none;
+  border-radius: 15px;
   outline: none;
 }
 
@@ -69,11 +70,11 @@ input[type="checkbox"] {
   background-color: var(--color3);
   margin: 0;
   font: inherit;
-  width: .5em;
-  height: .5em;
+  width: .6em;
+  height: .6em;
   border: none;
   border-radius: 50%;
-  transform: translateY(-0.25em);
+  transform: translateY(-0.1em);
 }
 
 input[type="checkbox"]:checked {
