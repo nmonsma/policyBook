@@ -4,7 +4,7 @@
         <title>EPCS Policy</title>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
-        <meta name="description" content="" />
+        <meta name="description" content="Policy" />
         <meta name="keywords" content=""/>
         <meta name="author" content="" />
         <link rel="stylesheet" href="stylesheets/style.css">
@@ -12,40 +12,44 @@
     </head>
 <body>
     <header>
-        <h1>Policy Repository</h1>
+        <h1 id="app-title">Policy Repository</h1>
+        <form id="handbook-selector-form">
+            Policies:
+            <select id="handbook-selector"></select>
+        </form>
+        <div class="dropdown">
+            <button class="dropdown-button">Display Options</button>
+            <form id="view-options" onsubmit="false">
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="areas-checkbox" name="areas-checkbox" checked>
+                    <label for="areas-checkbox">Area Headings</label>
+                </div>
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="sections-checkbox" name="sections-checkbox" checked>
+                    <label for="sections-checkbox">Section Headings</label>
+                </div>
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="policy-numbers-checkbox" name="policy-numbers-checkbox" checked>
+                    <label for="policy-numbers-checkbox">Policy Numbers</label>
+                </div>
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="handbooks-checkbox" name="handbooks-checkbox" checked>
+                    <label for="handbooks-checkbox">Handbooks</label>
+                </div>
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="content-checkbox" name="content-checkbox" checked>
+                    <label for="content-checkbox">Policy Paragraphs</label>
+                </div>
+                <div>
+                    <input class="sidebar-checkbox" type="checkbox" id="approval-info-checkbox" name="approval-info-checkbox" checked>
+                    <label for="approval-info-checkbox">Approval Information</label>
+                </div>
+                <div></div>
+            </form>
+        </div>
     </header>
     <div class="sidebar">
-        <form onsubmit="false">
-            Handbook:
-            <select id="handbook-selector"></select>
-            <br>
-            Display Options:
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="areas-checkbox" name="areas-checkbox" checked>
-                <label for="areas-checkbox">Area Headings</label>
-            </div>
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="sections-checkbox" name="sections-checkbox" checked>
-                <label for="sections-checkbox">Section Headings</label>
-            </div>
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="policy-numbers-checkbox" name="policy-numbers-checkbox" checked>
-                <label for="policy-numbers-checkbox">Policy Numbers</label>
-            </div>
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="handbooks-checkbox" name="handbooks-checkbox" checked>
-                <label for="handbooks-checkbox">Handbooks</label>
-            </div>
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="content-checkbox" name="content-checkbox" checked>
-                <label for="content-checkbox">Policy Paragraphs</label>
-            </div>
-            <div>
-                <input class="sidebar-checkbox" type="checkbox" id="approval-info-checkbox" name="approval-info-checkbox" checked>
-                <label for="approval-info-checkbox">Approval Information</label>
-            </div>
-            <div></div>
-        </form>
+        
     </div>
     <main id="main">
         <!-- 

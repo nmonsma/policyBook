@@ -3,6 +3,7 @@
 
 body {
     margin: 0 auto;
+    position: fixed;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--dark);
     background-color: var(--color1);  
@@ -11,66 +12,113 @@ body {
 
 h1, h2, h3, h4 {
   appearance: none;
-}
-
-br {
-  display: block;
-  line-height: 20px;
+  margin: 0 auto;
 }
 
 header {
     margin: 0 auto;
     top: 0;
-    padding: 10px;
+    height: 60px;
+    padding: 5px;
     width: 100vw;
     position: fixed;
-    background-color: var(--color5);
+    background-image: linear-gradient(120deg, var(--color2) 0%, var(--color5) 5%, var(--color4) 100%);
     color: var(--color5text);
-    border-bottom: 3px solid var(--dark);
+    /* border-top: 5px solid var(--dark);
+    border-bottom: 5px solid var(--dark); */
     user-select: none;
     z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr 25% 25%;
+    align-items: end;
+   
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.5) */
 }
 
-header h1{
+#app-title{
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin: 0 auto;
-  padding-left: 10px;
+  padding: 20px 20px;
+  align-self: end;
+
 }
 
-.sidebar {
-  margin: 0 auto;
-  top: 0;
-  height: 100vh;
-  padding: 75px 0 0 25px;
-  width: 20vw;
-  min-width: 150px;
-  position: fixed;
-  color: var(--color3text);
-  user-select: none;
-  /* box-shadow: 2px 2px 5px 0 rgba(46,41,43,.3); */
-  background-image: conic-gradient(at -15% 30%, var(--color3), var(--color2), var(--color1), var(--color3));
-}
-
-form {
+#handbook-selector-form {
+  width: 300px;
+  height: 34px;
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  justify-content: space-evenly;
+  background-color: #fff;
+  color: black;
+  font-size: 14px;
 }
 
-select {
-  padding: 8px;
+#handbook-selector {
+  padding: 5px;
   margin: 3px;
-  width: 85%;
   border: none;
   /* border-radius: 15px; */
   outline: none;
+  font-size: 14px;
 }
+
+#handbook-selector-form:hover, #handbook-selector-form:hover #handbook-selector {
+  background-color: var(--color1);
+}
+
+
+.dropdown {
+  display: inline-block;
+  width: 300px;
+  height: 34px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.dropdown:hover, .dropdown:hover .dropdown-button {
+  background-color: var(--color1);
+}
+
+.dropdown:focus-within #view-options, #view-options:hover {
+  display: block;
+}
+
+.dropdown-button {
+  width: 300px;
+  background-color: #fff;
+  padding: 9px 0 0 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  text-align: left;
+}
+
+#view-options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+#view-options div {
+  font-size: 14px;
+  padding: 15px 0 0 10px;
+
+}
+
 
 input[type="checkbox"] {
   appearance: none;
-  background-color: var(--color3);
+  background-color: white;
   margin: 0;
-  font: inherit;
+  font-size: 14px;
+  padding: 5px;
   width: .6em;
   height: .6em;
   border: none;
@@ -81,28 +129,46 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
   background-color: var(--dark);
 }
-
-#main {
-    margin-top: 75px;
-    padding: 0;
+.sidebar {
+  margin: 0 auto;
+  top: 85px;
+  left: 2vw;
+  height: calc(100vh - 200px);
+  padding: 75px 0 0 25px;
+  width: 19vw;
+  position: fixed;
+  color: var(--color3text);
+  user-select: none;
+  /* box-shadow: 2px 2px 5px 0 rgba(46,41,43,.3); */
+  background-image: conic-gradient(at -15% 30%, var(--color3), var(--color2), var(--color1), var(--color3));
+  box-shadow: 3px 3px 5px 1px rgba(0,0,0,.3), -3px -3px 5px 2px rgba(255,255,255,1);
 }
 
 
-@media only screen and (min-width: 950px) {
+
+#main {
+    padding: 0;
+    top: 70px;
+    left: 25vw;
+    position: fixed;
+    overflow-y: auto;
+    max-height: calc(100vh - 70px);
+    width: calc(75vw);
+
+}
+
+form {
+display: flex;
+flex-direction: column;
+}
+
+#subset {
+width: 18vw;
+min-width: 150px;
+}
+
+@media only screen and (max-width: 950px) {
 
 
-  #main {
-      margin-left: 25vw;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #subset {
-    width: 18vw;
-    min-width: 150px;
-  }
 
 }

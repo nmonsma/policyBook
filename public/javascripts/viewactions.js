@@ -10,9 +10,9 @@ const formAssociations = [
 
 const handbookAssociations = [
     {"dropdown": "All", "route": "allPolicies"},
-    {"dropdown": "Employee", "route": "employeePolicies"},
-    {"dropdown": "Family", "route": "familyPolicies"},
-    {"dropdown": "Extracurricular", "route": "extracurricularPolicies"}
+    {"dropdown": "Employee Handbook", "route": "employeePolicies"},
+    {"dropdown": "Family Handbook", "route": "familyPolicies"},
+    {"dropdown": "Extracurricular Handbook", "route": "extracurricularPolicies"}
 ]
 
 function showHide() {
