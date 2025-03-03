@@ -4,6 +4,11 @@ let policyTable = [];
 //Fetch Requests
 //Get JSON from database
 const loadPolicyTable = async (route)=> {
+    //Get the main element
+    const main = document.getElementById('main');
+    //Get the sidebar element
+    const sidebar = document.getElementById('sidebar');
+
     //Clear Policy Table
     main.textContent = '';
     //Reset current area and section
@@ -14,41 +19,55 @@ const loadPolicyTable = async (route)=> {
         const policyTable = await request.json(); //Convert the response to JSON
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
-            //If the policy in a new area and/or new section, add an area and section header
+            //If the policy in a new area and/or new section, add an area and section header, and add to the TOC sidebar
             if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentArea) {
                 currentArea = Math.floor(policyTable[selectedPolicyIndex].section_number/1000);
                 //Create Area Header
                 const createdAreaDiv = document.createElement('div');
+                createdAreaDiv.id = `${currentArea}`;
                 //Add content from policyTable:
                 const createdNumberSpan = document.createElement('span');
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentArea}`;
-                createdNumberSpan.id = `${currentArea}`;
                 createdNumberSpan.classList.add('policy-number');
-                createdTitleSpan.innerText = `(area titles need to be looked up in separate db table)`;
+                createdTitleSpan.innerText = `[area title]`;
                 createdAreaDiv.appendChild(createdNumberSpan);
                 createdAreaDiv.appendChild(createdTitleSpan);      
                 createdAreaDiv.classList.add('divider', 'area-title');
                 main.appendChild(createdAreaDiv); 
+
+                //Add to the sidebar
+                const createdSidebarP = document.createElement('p');
+                createdSidebarP.innerHTML = `<a href="#${createdNumberSpan.innerText}">${createdNumberSpan.innerText} ${createdTitleSpan.innerText}`;
+                createdSidebarP.classList.add('sidebar-item');
+                sidebar.appendChild(createdSidebarP); //Add to the sidebar                
             }
 
             if(policyTable[selectedPolicyIndex].section_number != currentSection) {
                 currentSection = policyTable[selectedPolicyIndex].section_number;
                 //Create Section Header
                 const createdSectionDiv = document.createElement('div');
+                createdSectionDiv.id = `${currentSection}`;
+ 
                 //Add content from policyTable
                 const createdNumberSpan = document.createElement('span');
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentSection}`;
-                createdNumberSpan.id = `${currentSection}`;
                 createdNumberSpan.classList.add('policy-number');
-                createdTitleSpan.innerText = `(section titles need to be looked up in separate db table)`;
+                createdTitleSpan.innerText = `[section title]`;
                 createdSectionDiv.appendChild(createdNumberSpan);
                 createdSectionDiv.appendChild(createdTitleSpan);      
     
                 createdSectionDiv.classList.add('divider', 'section-title');
                 main.appendChild(createdSectionDiv);
               
+                //Add to the sidebar
+                const createdSidebarP = document.createElement('p');
+                createdSidebarP.innerHTML = `<a href="#${createdNumberSpan.innerText}">${createdNumberSpan.innerText} ${createdTitleSpan.innerText}`;
+                createdSidebarP.classList.add('sidebar-item');
+                createdSidebarP.classList.add('section-toc-entry');
+                sidebar.appendChild(createdSidebarP); //Add to the sidebar                
+
             }
 
             //Create Policy Div
@@ -165,7 +184,7 @@ const loadPolicyTable = async (route)=> {
 // ]
 
 //Get Major Dom Element
-const main = document.getElementById('main');
+
     
 
 //Main Actions

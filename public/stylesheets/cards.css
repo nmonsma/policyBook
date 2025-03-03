@@ -1,26 +1,30 @@
-span {
+main span {
   padding: 0 5px 0 0;
   margin: 0;
 }
 
+.divider, .policy {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .divider {
-  margin: 15px 0 15px 15px;
   background-color: var(--color1);
   color: var(--color1text);
   border-top: 5px solid var(--dark);
   padding: 15px;
   font-weight: 800;
+  font-size: 14px;
   box-shadow: 3px 3px 5px 1px rgba(0,0,0,.3), -3px -3px 5px 2px rgba(255,255,255,1);
   /* border-radius: 25px 0 0 25px; */
 }
-
 
 .section-title {
   margin-left: 2vw;
 }
 
 .policy {
-  margin: 15px 15px 15px 4vw;
+  margin-left: 4vw;
   max-width: 800px;
   padding: 0;
   /* border-radius: 25px; */
@@ -29,6 +33,7 @@ span {
 }
 
   .heading {
+    font-size: 14px;
     padding: 15px;
     margin: 0;
     height: 20px;
@@ -87,6 +92,7 @@ span {
     padding: 15px;
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1em;
     border-top: 2px solid rgba(255,255,255,.5); 
     border-bottom: 2px solid rgba(0,0,0,.1);
   }

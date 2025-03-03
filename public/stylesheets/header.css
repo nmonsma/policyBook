@@ -1,0 +1,131 @@
+header {
+    margin: 0 auto;
+    top: 0;
+    height: 60px;
+    padding: 0;
+    width: 100vw;
+    position: fixed;
+    user-select: none;
+    z-index: 99;
+}
+
+#top-row {
+  display: block;
+  margin: 0;
+  padding: 0 0 5px 10px;
+  background-color: white;
+  border-top: 5px solid var(--dark);
+  color: var(--dark);
+  font-family: "Almendra SC", serif;
+}
+
+#bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 300px 300px;
+  background-color: var(--color5);
+  color: var(--color5text);
+}
+
+#subscriber {
+  padding: 5px 10px;
+  justify-self: start;
+  align-self: center;
+  font-size: 12px;
+}
+
+#handbook-selector-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+}
+
+    #handbook-selector {
+      border-top: 2px solid rgba(255,255,255,.5); 
+      border-left: 2px solid rgba(0,0,0,.1);
+  
+      border: none;
+      outline: none;
+      font-size: 12px;
+      background-color: var(--color5);
+      color: white;
+    }
+
+    #handbook-selector:hover {
+      color: var(--color3);
+    }
+
+
+.dropdown {
+  display: inline-block;
+  width: 300px;
+  height: 34px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.dropdown:hover, .dropdown:hover .dropdown-button {
+  background-color: var(--color1);
+}
+
+.dropdown:focus-within #view-options, #view-options:hover {
+  display: block;
+}
+
+.dropdown-button {
+  width: 300px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  text-align: left;
+
+}
+
+#view-options {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+#view-options div {
+  font-size: 14px;
+  padding: 15px 0 0 10px;
+
+}
+
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: white;
+  margin: 0;
+  font-size: 14px;
+  padding: 5px;
+  width: .6em;
+  height: .6em;
+  border: none;
+  border-radius: 50%;
+  transform: translateY(-0.1em);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--dark);
+}
+
+form {
+display: flex;
+flex-direction: column;
+}
+
+#subset {
+width: 18vw;
+min-width: 150px;
+}
