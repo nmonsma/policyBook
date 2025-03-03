@@ -2,7 +2,7 @@
 let policyTable = [];
 
 //Fetch Requests
-//Get JSON from database
+//Load Policy Table
 const loadPolicyTable = async (route)=> {
     //Get the main element
     const main = document.getElementById('main');
@@ -73,20 +73,26 @@ const loadPolicyTable = async (route)=> {
             //Create Policy Div
             const createdDiv = document.createElement('div');
             createdDiv.id = `${policyTable[selectedPolicyIndex].policy_number}`;
+
+            //Isolate policy id
+            const policyId = policyTable[selectedPolicyIndex].policy_id;
             
             //Create and Add Policy Header with #### Title handbook
             const headingParagraph = document.createElement('h4');
+
 
                 //Add policy number
                 const numberSpan = document.createElement('span');
                 numberSpan.innerText = `${policyTable[selectedPolicyIndex].policy_number}\u2003`;
                 numberSpan.classList.add('policy-number');
+                numberSpan.id=(`${policyId}-policy-number`);
                 headingParagraph.appendChild(numberSpan);
                 
                 //Add policy title
                 const titleSpan = document.createElement('span');
                 titleSpan.innerText = `${policyTable[selectedPolicyIndex].title}\u2002`;
                 titleSpan.classList.add('policy-title');
+                titleSpan.id=(`${policyId}-policy-title`);
                 headingParagraph.appendChild(titleSpan);
                 
                 //Add handbooks
@@ -106,34 +112,42 @@ const loadPolicyTable = async (route)=> {
                 if (policyTable[selectedPolicyIndex].handbook_x) {
                     const handbookX = document.createElement('span');
                     handbookX.innerText = 'X';
-                    handbookX.classList.add('handbook-x');
+                    handbookX.classList.add('handbook-x')
                     handbookSpan.appendChild(handbookX);
                 }
 
                 handbookSpan.classList.add('policy-handbook');
+                handbookSpan.id=(`${policyId}-handbooks`);
                 headingParagraph.appendChild(handbookSpan);
         
             headingParagraph.classList.add('heading');
-        
+            headingParagraph.id=(`${policyId}-policy-heading`);
             createdDiv.appendChild(headingParagraph);
         
             //Create and Add Policy Content
             const contentParagraph = document.createElement('p');
             contentParagraph.innerText = `${policyTable[selectedPolicyIndex].content}`;
             contentParagraph.classList.add('content');
+            contentParagraph.id=(`${policyId}-content`);
             createdDiv.appendChild(contentParagraph);
         
             //Create and Add Footer with Adopted ####-##-## by *
             const footerParagraph = document.createElement('p');
             footerParagraph.innerText = `${policyTable[selectedPolicyIndex].status} on ${policyTable[selectedPolicyIndex].date} by ${policyTable[selectedPolicyIndex].entity}`;
             footerParagraph.classList.add('approval');
+            footerParagraph.id=(`${policyId}-approval`);
             createdDiv.appendChild(footerParagraph);
         
             //Add Div to main
             main.appendChild(createdDiv); 
 
             createdDiv.classList.add('policy', `status-${policyTable[selectedPolicyIndex].status}`);
+
+            //Add classes to board policies
             if(Math.floor(currentSection/1000)==currentSection/1000) {
+                createdDiv.classList.add('board-policy');
+            }
+            if(currentSection<2000) {
                 createdDiv.classList.add('board-policy');
             }
         }
@@ -145,6 +159,8 @@ const loadPolicyTable = async (route)=> {
 
     
 }
+
+
 
 // Sample Result:
 // [

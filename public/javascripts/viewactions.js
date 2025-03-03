@@ -35,6 +35,51 @@ function showHide() {
 
 }
 
+//Refresh Policy Table
+const refreshPolicyTable = async ()=> {
+    
+    const request = await fetch(handbookSelector.value); //Get the table json from the specified route.
+    try {
+        const policyTable = await request.json(); //Convert the response to JSON
+
+        for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-policy-number`).innerText = `${policyTable[selectedPolicyIndex].policy_number}\u2003`;
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-policy-title`).innerText = `${policyTable[selectedPolicyIndex].title}\u2002`;
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-content`).innerText = `${policyTable[selectedPolicyIndex].content}`;
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-handbooks`).remove;
+            const handbookSpan = document.createElement('span');
+            if (policyTable[selectedPolicyIndex].handbook_e) {
+                const handbookE = document.createElement('span');
+                handbookE.innerText = 'E';
+                handbookE.classList.add('handbook-e');
+                handbookSpan.appendChild(handbookE);
+            }
+            if (policyTable[selectedPolicyIndex].handbook_f) {
+                const handbookF = document.createElement('span');
+                handbookF.innerText = 'F';
+                handbookF.classList.add('handbook-f');
+                handbookSpan.appendChild(handbookF);
+            }
+            if (policyTable[selectedPolicyIndex].handbook_x) {
+                const handbookX = document.createElement('span');
+                handbookX.innerText = 'X';
+                handbookX.classList.add('handbook-x')
+                handbookSpan.appendChild(handbookX);
+            }
+
+            handbookSpan.classList.add('policy-handbook');
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-policy-heading`).appendChild(handbookSpan);
+            
+            document.getElementById(`${policyTable[selectedPolicyIndex].policy_id}-approval`).innerText = `${policyTable[selectedPolicyIndex].status} on ${policyTable[selectedPolicyIndex].date} by ${policyTable[selectedPolicyIndex].entity}`;
+
+        }       
+
+    }catch(error){
+        console.log("error", error);
+    }
+
+}
+
 
 //This function was AI generated and needs to be checked:
 function loadHandbook() {
@@ -60,3 +105,4 @@ for (const object of document.getElementsByClassName('sidebar-checkbox')) {
 for (const item of handbookAssociations) {
     document.getElementById('handbook-selector').addEventListener('change', loadHandbook);
 }
+document.getElementById('refresh').addEventListener('click', refreshPolicyTable);

@@ -16,34 +16,35 @@
         <div id="top-row"><h1 id="app-title">Policy Repository</h1></div>
         <div id="bottom-row">
             <h2 id="subscriber">East Palmyra Christian School</h2>
-            <form id="handbook-selector-form">
-                Policies:
+            <form onsubmit="return false" id="handbook-selector-form">
+                <span id="handbook-selector-label">Policies:</span>
                 <select id="handbook-selector"></select>
+                <button id="refresh">↻</button>
             </form>
             <div class="dropdown">
                 <button class="dropdown-button">Display Options</button>
                 <form id="view-options" onsubmit="false">
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="areas-checkbox" name="areas-checkbox" checked>
                         <label for="areas-checkbox">Area Headings</label>
                     </div>
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="sections-checkbox" name="sections-checkbox" checked>
                         <label for="sections-checkbox">Section Headings</label>
                     </div>
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="policy-numbers-checkbox" name="policy-numbers-checkbox" checked>
                         <label for="policy-numbers-checkbox">Policy Numbers</label>
                     </div>
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="handbooks-checkbox" name="handbooks-checkbox" checked>
                         <label for="handbooks-checkbox">Handbooks</label>
                     </div>
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="content-checkbox" name="content-checkbox" checked>
                         <label for="content-checkbox">Policy Paragraphs</label>
                     </div>
-                    <div>
+                    <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="approval-info-checkbox" name="approval-info-checkbox" checked>
                         <label for="approval-info-checkbox">Approval Information</label>
                     </div>

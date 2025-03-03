@@ -21,7 +21,7 @@ header {
 
 #bottom-row {
   display: grid;
-  grid-template-columns: 1fr 300px 300px;
+  grid-template-columns: 1fr 300px 300px 3vw;
   background-color: var(--color5);
   color: var(--color5text);
 }
@@ -34,43 +34,52 @@ header {
 }
 
 #handbook-selector-form {
+  margin: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  color: white;
-  font-size: 12px;
+  background-color: white;
+  color: black;
+  font-size: 12px;  
+  box-shadow: 1px 1px 2px 0.5px rgba(0,0,0,.3), -1px -1px 2px 0.5px rgba(255,255,255,.3);
 }
 
+    #handbook-selector-label {
+      border-right: 2px solid rgba(255,255,255,.5); 
+    }
+
     #handbook-selector {
-      border-top: 2px solid rgba(255,255,255,.5); 
-      border-left: 2px solid rgba(0,0,0,.1);
-  
       border: none;
+      border-left: 2px solid rgba(0,0,0,.1);
       outline: none;
       font-size: 12px;
-      background-color: var(--color5);
-      color: white;
+      background-color: white;
+      color: black;
     }
 
-    #handbook-selector:hover {
-      color: var(--color3);
-    }
 
+
+#handbook-selector:hover, #refresh:hover, .dropdown:hover, .dropdown:hover .dropdown-button, .view-option:hover  {
+  background-color: var(--color1);
+
+}
 
 .dropdown {
   display: inline-block;
+  padding: 3px;
+  margin: 10px;
   width: 300px;
-  height: 34px;
+  justify-self: start;
+  align-self: center;
   background-color: #fff;
   border: none;
   outline: none;
   font-size: 14px;
+  box-shadow: 1px 1px 2px 0.5px rgba(0,0,0,.3), -1px -1px 2px 0.5px rgba(255,255,255,.3);
 }
 
-.dropdown:hover, .dropdown:hover .dropdown-button {
-  background-color: var(--color1);
-}
+
 
 .dropdown:focus-within #view-options, #view-options:hover {
   display: block;
@@ -89,16 +98,15 @@ header {
 #view-options {
   display: none;
   position: absolute;
-  background-color: #fff;
+  background-color: white;
   color: black;
   min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 100;
 }
 
-#view-options div {
-  font-size: 14px;
-  padding: 15px 0 0 10px;
+.view-option {
+  padding: 5px;
 
 }
 
@@ -115,6 +123,8 @@ input[type="checkbox"] {
   border-radius: 50%;
   transform: translateY(-0.1em);
 }
+
+
 
 input[type="checkbox"]:checked {
   background-color: var(--dark);
