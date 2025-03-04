@@ -1,12 +1,13 @@
 header {
     margin: 0 auto;
     top: 0;
-    height: 60px;
     padding: 0;
     width: 100vw;
     position: fixed;
     user-select: none;
     z-index: 99;
+    display: grid;
+    grid-template-rows: 45px 35px;
 }
 
 #top-row {
@@ -33,49 +34,83 @@ header {
   font-size: 12px;
 }
 
+.menu {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
+
 #handbook-selector-form {
-  margin: 10px;
+  width: fit-content;
+  height: 25px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--button-color);
   color: black;
   font-size: 12px;  
   box-shadow: 1px 1px 2px 0.5px rgba(0,0,0,.3), -1px -1px 2px 0.5px rgba(255,255,255,.3);
 }
 
     #handbook-selector-label {
-      border-right: 2px solid rgba(255,255,255,.5); 
+      margin: 0;
+      padding: 0 10px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-right: 2px solid rgba(0,0,0,.1);
+
     }
 
     #handbook-selector {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       border: none;
-      border-left: 2px solid rgba(0,0,0,.1);
+      border-left: 2px solid rgba(255,255,255,.5); 
+      border-right: 2px solid rgba(0,0,0,.1);
       outline: none;
       font-size: 12px;
-      background-color: white;
+      background-color: var(--button-color);
       color: black;
+    }
+
+    #refresh {
+      border: none;
+      margin: 0;
+      background-color: var(--button-color);
+      height: 100%;
+      border-left: 2px solid rgba(255,255,255,.5); 
+      font-size: 16px;
     }
 
 
 
 #handbook-selector:hover, #refresh:hover, .dropdown:hover, .dropdown:hover .dropdown-button, .view-option:hover  {
-  background-color: var(--color1);
+  background-color: white;
+}
+
+#refresh:active, .dropdown:hover .dropdown-button:active, .view-option:active {
+  background-color: var(--color1b);
 
 }
 
+
 .dropdown {
-  display: inline-block;
-  padding: 3px;
-  margin: 10px;
+  height: 25px;
+  padding: 0 5px;
   width: 300px;
   justify-self: start;
   align-self: center;
-  background-color: #fff;
+  background-color: var(--button-color);
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 12px;
   box-shadow: 1px 1px 2px 0.5px rgba(0,0,0,.3), -1px -1px 2px 0.5px rgba(255,255,255,.3);
 }
 
@@ -87,10 +122,10 @@ header {
 
 .dropdown-button {
   width: 300px;
-  background-color: #fff;
+  background-color: var(--button-color);
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
 
 }
@@ -98,6 +133,7 @@ header {
 #view-options {
   display: none;
   position: absolute;
+  top: 75px;
   background-color: white;
   color: black;
   min-width: 300px;
@@ -107,11 +143,14 @@ header {
 
 .view-option {
   padding: 5px;
+}
 
+.view-option:hover {
+  background-color: var(--color1b);
 }
 
 
-input[type="checkbox"] {
+.sidebar-checkbox {
   appearance: none;
   background-color: white;
   margin: 0;
@@ -124,9 +163,7 @@ input[type="checkbox"] {
   transform: translateY(-0.1em);
 }
 
-
-
-input[type="checkbox"]:checked {
+.sidebar-checkbox:checked {
   background-color: var(--dark);
 }
 

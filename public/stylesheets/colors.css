@@ -16,5 +16,6 @@
   --darktext: white;
   --not-approved: var(--color2);
   --board-policy: var(--color3);
+  --button-color: var(--color1);
   --approved: white;
 }
