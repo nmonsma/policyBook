@@ -63,6 +63,13 @@ app.get('/extracurricularPolicies', (req, res) => {
   });
 });
 
+app.get('/headings', (req, res) => {
+  dbConnection.query('SELECT * FROM headings ORDER BY heading_id', (err, result) => {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

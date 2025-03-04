@@ -32,6 +32,10 @@ header {
   justify-self: start;
   align-self: center;
   font-size: 12px;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .menu {

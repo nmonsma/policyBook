@@ -14,23 +14,40 @@ const loadPolicyTable = async (route)=> {
     //Reset current area and section
     currentArea = 0;
     currentSection = 0;
-    const request = await fetch(route); //Get the table json from the specified route.
     try {
+        const request = await fetch(route); //Get the table json from the specified route.
         const policyTable = await request.json(); //Convert the response to JSON
+
+        const request2 = await fetch('headings'); //Get the headings json from the specified route.
+        const headings = await request2.json(); //Convert the response to JSON
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
             //If the policy in a new area and/or new section, add an area and section header, and add to the TOC sidebar
             if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentArea) {
                 currentArea = Math.floor(policyTable[selectedPolicyIndex].section_number/1000);
+                
+                //Get the area title from the headings table
+                let areaTitle = '';
+                try {
+                    areaTitle = headings.find(({ heading_number }) => heading_number === currentArea).heading_title;
+                } catch (error) {
+                    console.log("error", error);
+                    areaTitle = "[Title Not Found]";
+                }
+                
+
                 //Create Area Header
                 const createdAreaDiv = document.createElement('div');
                 createdAreaDiv.id = `${currentArea}`;
+                
                 //Add content from policyTable:
                 const createdNumberSpan = document.createElement('span');
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentArea}`;
                 createdNumberSpan.classList.add('policy-number');
-                createdTitleSpan.innerText = `[area title]`;
+                
+                createdTitleSpan.innerText = `${areaTitle}`;          
+                
                 createdAreaDiv.appendChild(createdNumberSpan);
                 createdAreaDiv.appendChild(createdTitleSpan);      
                 createdAreaDiv.classList.add('divider', 'area-title');
@@ -45,6 +62,15 @@ const loadPolicyTable = async (route)=> {
 
             if(policyTable[selectedPolicyIndex].section_number != currentSection) {
                 currentSection = policyTable[selectedPolicyIndex].section_number;
+                
+                //Get the section title from the headings table
+                let sevctionTitle = '';
+                try {
+                    sectionTitle = headings.find(({ heading_number }) => heading_number === currentSection).heading_title;
+                } catch (error) {
+                    console.log("error", error);
+                    sectionTitle = "[Title Not Found]";
+                }               
                 //Create Section Header
                 const createdSectionDiv = document.createElement('div');
                 createdSectionDiv.id = `${currentSection}`;
@@ -54,7 +80,9 @@ const loadPolicyTable = async (route)=> {
                 const createdTitleSpan = document.createElement('span');
                 createdNumberSpan.innerText = `${currentSection}`;
                 createdNumberSpan.classList.add('policy-number');
-                createdTitleSpan.innerText = `[section title]`;
+
+                createdTitleSpan.innerText = `${sectionTitle}`;
+                
                 createdSectionDiv.appendChild(createdNumberSpan);
                 createdSectionDiv.appendChild(createdTitleSpan);      
     
