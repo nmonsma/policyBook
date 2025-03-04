@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/nickjufg/epcspolicybook
+    - /bin/cp -R /home/nickjufg/repositories/policyBook $DEPLOYPATH
