@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var credentials = require('./credentials.json');
+const credentials = require('./credentials.js');
 
 var app = express();
 
@@ -22,7 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //MySQL Setup
 const mysql = require('mysql2')
-const dbConnection = mysql.createConnection(credentials)
+const dbConnection = mysql.createConnection({
+  host: credentials.host,
+  user: credentials.user,
+  password: credentials.password,
+  database: credentials.database
+})
 
 //Connect to MySQL
 dbConnection.connect((err) => {
