@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var credentials = require('./credentials.json');
 
 var app = express();
 
@@ -21,12 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //MySQL Setup
 const mysql = require('mysql2')
-const dbConnection = mysql.createConnection({
-  host: 'policy.eastpal.org',
-  user: 'epcspolicy',
-  password: 'nqQ*j8xn0a3wSomZH3',
-  database: 'policyrepository'
-})
+const dbConnection = mysql.createConnection(credentials)
 
 //Connect to MySQL
 dbConnection.connect((err) => {
