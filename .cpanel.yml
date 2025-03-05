@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/nickjufg/epcspolicybook
+    - export DEPLOYPATH=/home/nickjufg/nodevenv
     - /bin/cp -R /home/nickjufg/repositories/policyBook $DEPLOYPATH
