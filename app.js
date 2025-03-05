@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //MySQL Setup
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const dbConnection = mysql.createConnection({
   host: 'policy.eastpal.org',
   user: 'epcspolicy',
