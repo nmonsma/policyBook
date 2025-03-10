@@ -64,7 +64,7 @@ const loadPolicyTable = async (route)=> {
                 currentSection = policyTable[selectedPolicyIndex].section_number;
                 
                 //Get the section title from the headings table
-                let sevctionTitle = '';
+                let sectionTitle = '';
                 try {
                     sectionTitle = headings.find(({ heading_number }) => heading_number === currentSection).heading_title;
                 } catch (error) {
@@ -233,6 +233,6 @@ const loadPolicyTable = async (route)=> {
 
 //Main Actions
 //Update policyTable
-loadPolicyTable('allPolicies');
+loadPolicyTable('all_policies');
 //Iterate through rows
 
