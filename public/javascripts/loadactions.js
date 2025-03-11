@@ -9,8 +9,9 @@ const loadPolicyTable = async (route)=> {
     //Get the sidebar element
     const sidebar = document.getElementById('sidebar');
 
-    //Clear Policy Table
+    //Clear Policy Table and Sidebar
     main.textContent = '';
+    sidebar.textContent = '';
     //Reset current area and section
     currentArea = 0;
     currentSection = 0;
