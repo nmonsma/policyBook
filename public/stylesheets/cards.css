@@ -97,6 +97,10 @@ main span {
     border-bottom: 2px solid rgba(0,0,0,.1);
   }
 
+  .policy-image {
+    width: 100%;
+  }
+
   .approval {
     border-top: 2px solid rgba(255,255,255,.5); 
     padding: 15px;

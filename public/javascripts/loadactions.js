@@ -156,6 +156,8 @@ const loadPolicyTable = async (route)=> {
             //Create and Add Policy Content
             const contentParagraph = document.createElement('p');
             contentParagraph.innerText = `${policyTable[selectedPolicyIndex].content}`;
+                //If there is an image URL, add that image
+                if(policyTable[selectedPolicyIndex].image_url!=null) {contentParagraph.innerHTML += `<img src="${policyTable[selectedPolicyIndex].image_url}" class="policy-image"/>`;}
             contentParagraph.classList.add('content');
             contentParagraph.id=(`${policyId}-content`);
             createdDiv.appendChild(contentParagraph);
