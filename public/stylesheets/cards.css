@@ -116,7 +116,7 @@ main span {
     background-image: conic-gradient(at 180% 0%, var(--color1), var(--color3), var(--color1));
   }
 
-.policy:not(.status-approved) .content {
+.policy:not(.status-approved) .content, .policy:not(.status-approved) .approval{
   background-image: conic-gradient(at 110% 110%, var(--color1), var(--color2), var(--color1));
 }
   
