@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/nickjufg/nodejs/policyBook
+    - export DEPLOYPATH=/home/nickjufg/nodejs
     - /bin/cp -R /home/nickjufg/repositories/policyBook $DEPLOYPATH
