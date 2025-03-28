@@ -64,12 +64,19 @@ dbConnection.connect((err) => {
   });
 
   app.get('/epcspolicy/board_pending', (req, res) => {
-    dbConnection.query("SELECT * FROM policies WHERE entity = 'Board' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
-  
+
+  app.get('/epcspolicy/admin_pending', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
 // //Route for namecheap shared hosting deployment
 //   app.get('/epcspolicy', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'))

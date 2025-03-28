@@ -175,11 +175,11 @@ const loadPolicyTable = async (route)=> {
             createdDiv.classList.add('policy', `status-${policyTable[selectedPolicyIndex].status}`);
 
             //Add classes to board policies
-            if(Math.floor(currentSection/1000)==currentSection/1000) {
+            try {
+                if(policyTable[selectedPolicyIndex].entity.toLowerCase() == 'board' || policyTable[selectedPolicyIndex].entity.toLowerCase() == 'society') {
                 createdDiv.classList.add('board-policy');
-            }
-            if(currentSection<2000) {
-                createdDiv.classList.add('board-policy');
+            }} catch (error) {
+                console.log("error", error);
             }
         }
 

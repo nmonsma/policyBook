@@ -14,7 +14,9 @@ const handbookAssociations = [
     {"dropdown": "Family Handbook", "route": "family_policies"},
     {"dropdown": "Extracurricular Handbook", "route": "extracurricular_policies"},
     {"dropdown": "Board Action Needed", "route": "board_pending"},
+    {"dropdown": "Admin Action Needed", "route": "admin_pending"},
 ]
+
 
 function showHide() {
     //Find the css class associated with the option selected and toggle the hidden class to all elements of that css class.
