@@ -77,6 +77,58 @@ dbConnection.connect((err) => {
     });
   });
 
+//Create Alternate Routes
+  //Create Routes
+  app.get('/all_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/employee_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/family_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/extracurricular_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/headings', (req, res) => {
+    dbConnection.query('SELECT * FROM headings ORDER BY heading_id', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/board_pending', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/admin_pending', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+
 // //Route for namecheap shared hosting deployment
 //   app.get('/epcspolicy', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'))
