@@ -17,9 +17,11 @@ const loadPolicyTable = async (route)=> {
     currentSection = 0;
     try {
         const request = await fetch(route); //Get the table json from the specified route.
+        console.log(request); //Log the request for debugging
         const policyTable = await request.json(); //Convert the response to JSON
 
         const request2 = await fetch('headings'); //Get the headings json from the specified route.
+        console.log(request2); //Log the request for debugging
         const headings = await request2.json(); //Convert the response to JSON
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
