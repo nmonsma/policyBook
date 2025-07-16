@@ -1,6 +1,7 @@
 @import url(colors.css);
 @import url(cards.css);
 @import url(header.css);
+@import url(loading.css);
 
 :root {
   --content-top: 100px;

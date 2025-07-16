@@ -4,6 +4,9 @@ let policyTable = [];
 //Fetch Requests
 //Load Policy Table
 const loadPolicyTable = async (route)=> {
+    //Start the Loading Animation
+    document.getElementById('loading-container').classList.remove('hidden');
+
     //Get the main element
     const main = document.getElementById('main');
     //Get the sidebar element
@@ -23,6 +26,9 @@ const loadPolicyTable = async (route)=> {
         const request2 = await fetch('headings'); //Get the headings json from the specified route.
         console.log(request2); //Log the request for debugging
         const headings = await request2.json(); //Convert the response to JSON
+
+        //End the Loading Animation
+        document.getElementById('loading-container').classList.add('hidden');
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
             //If the policy in a new area and/or new section, add an area and section header, and add to the TOC sidebar
