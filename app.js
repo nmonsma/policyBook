@@ -141,10 +141,5 @@ app.listen(process.env.PORT || 3000, function () {
 })
 
 
-//To run the app in Cpanel:
-//1. Create the application with the proper root location. Choose recommended node.js version; set epcspolicy as application URL. Set app.js as the startup file.
-//2. Run NPM Install.
-//3. Click "Start App"
-//4. Navigate to the Terminal, and run: source /home/nickjufg/nodevenv/nodejs/policyBook/14/bin/activate && cd /home/nickjufg/nodejs/policyBook
-//5. Run: npm start --scripts-prepend-node-path
+
 
