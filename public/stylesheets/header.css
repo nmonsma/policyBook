@@ -82,6 +82,7 @@ header {
       font-size: 12px;
       background-color: var(--button-color);
       color: black;
+      user-select: none;
     }
 
     #refresh {

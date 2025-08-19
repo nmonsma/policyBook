@@ -19,8 +19,13 @@ main span {
   /* border-radius: 25px 0 0 25px; */
 }
 
+.area-title {
+  mso-style-name: "Heading 2"
+}
+
 .section-title {
   margin-left: 2vw;
+  mso-style-name: "Heading 3"
 }
 
 .policy {
@@ -42,6 +47,7 @@ main span {
     grid-template-areas: "number title handbooks";
     border-top: 5px solid var(--dark);
     border-bottom: 2px solid rgba(0,0,0,.1);
+    mso-style-name: "Heading 4"
   
   }
 
@@ -95,6 +101,7 @@ main span {
     font-size: 1em;
     border-top: 2px solid rgba(255,255,255,.5); 
     border-bottom: 2px solid rgba(0,0,0,.1);
+    mso-style-name: "Normal"
   }
 
   .policy-image {
