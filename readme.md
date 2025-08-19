@@ -18,7 +18,7 @@ To run the app in Cpanel:
 To create policy manual:
 1. Select appropriate manual from the drop-down list.
 2. Unselect policy numbers, approval information, and hanbooks from Display Options.
-3. Ctrl+C to copy policy book.
+3. Ctrl+A, then Ctrl+C to copy policy book.
 4. Ctrl+V to paste into MS Word document.
 
 Format Policy Headings:
@@ -41,11 +41,15 @@ Format Section Headings
 
 18. Find your major headings, and change the styles to Heading 2.
 
+Replace line breaks with paragraphs.
+
 Now, choose formatting for your styles, and print!
 
 List Paragraphs:
 1. Create a List Paragraph style with proper indents.
-2. Find and Replace: "^p- " with "^p-^t" and List Paragraph Style.
-3. Find and Replace using wildcards: "[^013][0-9]@. " with (blank) and List Paragraph Style
+2. Find and Replace: "^p- " with "^p-| " to isolate bulleted list items.
+3. Find and Replace using wildcards: "([^013][0-9]@. )" with "\1|" to isolate numbered list items.
+3. Find and Replace: "|" with blank and List Paragraph Style.
+3. Find and Replace "|" with blank and no formatting to remove pipes. 
 
 Resize images so they fit on the page.
