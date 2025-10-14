@@ -77,6 +77,13 @@ dbConnection.connect((err) => {
     });
   });
 
+  app.get('/epcspolicy/amended', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
 //Create Alternate Routes
   //Create Routes
   app.get('/all_policies', (req, res) => {
@@ -128,6 +135,12 @@ dbConnection.connect((err) => {
     });
   });
 
+  app.get('/amended', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
 
 // //Route for namecheap shared hosting deployment
 //   app.get('/epcspolicy', (req, res) => {
