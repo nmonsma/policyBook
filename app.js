@@ -9,8 +9,7 @@ const credentials = require('./credentials.js');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-/*Spin up the Server*/
-app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
+console.log('App started at:', new Date().toLocaleString());
 
 //MySQL Setup
 const mysql = require('mysql2');
@@ -29,6 +28,7 @@ dbConnection.connect((err) => {
   
   //Create Routes
   app.get('/epcspolicy/all_policies', (req, res) => {
+    console.log('all policies route hit');
     dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
       if (err) throw err;
       res.json(result);
@@ -87,6 +87,7 @@ dbConnection.connect((err) => {
 //Create Alternate Routes
   //Create Routes
   app.get('/all_policies', (req, res) => {
+    console.log('all policies route hit without prefix');
     dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
       if (err) throw err;
       res.json(result);
@@ -147,10 +148,14 @@ dbConnection.connect((err) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 //   });
 
+/*Spin up the Server*/
+app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
+
 // Listen on port 3000
 //change this to process.env.PORT for production
-app.listen(process.env.PORT || 3000, function () {
-    console.log('listening on port 3000')
+app.listen(process.env.PORT, function () {
+    console.log('listening')
+    console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 })
 
 
