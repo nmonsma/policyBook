@@ -168,8 +168,13 @@ const loadPolicyTable = async (route)=> {
         
             //Create and Add Policy Paragraph Content
             const contentParagraph = document.createElement('p');
-            contentParagraph.innerHTML = `${policyTable[selectedPolicyIndex].content}`;
-                //If there is an image URL, add that image
+            
+            //Add content from policyTable as innerText or innerHTML depending on the HTML_content flag
+            if (policyTable[selectedPolicyIndex].HTML_content) {            
+                contentParagraph.innerHTML = `${policyTable[selectedPolicyIndex].content}`}
+            else {contentParagraph.innerText = `${policyTable[selectedPolicyIndex].content}`;}
+                
+            //If there is an image URL, add that image
                 if(policyTable[selectedPolicyIndex].image_url!=null) {contentParagraph.innerHTML += `<img src="${policyTable[selectedPolicyIndex].image_url}" class="policy-image"/>`;}
             contentParagraph.classList.add('content');
             contentParagraph.id=(`${policyId}-content`);
