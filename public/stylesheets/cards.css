@@ -20,12 +20,14 @@ main span {
 }
 
 .area-title {
-  mso-style-name: "Heading 2"
+  mso-style-name: "Heading 2";
+  font-size: 16px;
 }
 
 .section-title {
   margin-left: 2vw;
-  mso-style-name: "Heading 3"
+  mso-style-name: "Heading 3";
+  font-size: 15px;
 }
 
 .policy {

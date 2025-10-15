@@ -31,7 +31,9 @@ const loadPolicyTable = async (route)=> {
         document.getElementById('loading-container').classList.add('hidden');
 
         for (let selectedPolicyIndex=0; selectedPolicyIndex<policyTable.length; selectedPolicyIndex++) {
-            //If the policy in a new area and/or new section, add an area and section header, and add to the TOC sidebar
+            
+        //New Area
+            //If the policy in a new area, add an area header and add to the TOC sidebar
             if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentArea) {
                 currentArea = Math.floor(policyTable[selectedPolicyIndex].section_number/1000);
                 
@@ -69,6 +71,8 @@ const loadPolicyTable = async (route)=> {
                 sidebar.appendChild(createdSidebarP); //Add to the sidebar                
             }
 
+        //New Section
+            //If new section, add section header and add to the TOC sidebar
             if(policyTable[selectedPolicyIndex].section_number != currentSection) {
                 currentSection = policyTable[selectedPolicyIndex].section_number;
                 
@@ -107,6 +111,7 @@ const loadPolicyTable = async (route)=> {
 
             }
 
+        //Add Policy
             //Create Policy Div
             const createdDiv = document.createElement('div');
             createdDiv.id = `${policyTable[selectedPolicyIndex].policy_number}`;
@@ -117,6 +122,12 @@ const loadPolicyTable = async (route)=> {
             //Create and Add Policy Header with #### Title handbook
             const headingParagraph = document.createElement('h4');
 
+                //Add policy title -- This is added first, even though it is displayed second, so that copying and pasting into Word puts the title first.
+                const titleSpan = document.createElement('span');
+                titleSpan.innerText = `${policyTable[selectedPolicyIndex].title}\u2002`;
+                titleSpan.classList.add('policy-title');
+                titleSpan.id=(`${policyId}-policy-title`);
+                headingParagraph.appendChild(titleSpan);
 
                 //Add policy number
                 const numberSpan = document.createElement('span');
@@ -125,12 +136,6 @@ const loadPolicyTable = async (route)=> {
                 numberSpan.id=(`${policyId}-policy-number`);
                 headingParagraph.appendChild(numberSpan);
                 
-                //Add policy title
-                const titleSpan = document.createElement('span');
-                titleSpan.innerText = `${policyTable[selectedPolicyIndex].title}\u2002`;
-                titleSpan.classList.add('policy-title');
-                titleSpan.id=(`${policyId}-policy-title`);
-                headingParagraph.appendChild(titleSpan);
                 
                 //Add handbooks
                 const handbookSpan = document.createElement('span');
@@ -161,9 +166,9 @@ const loadPolicyTable = async (route)=> {
             headingParagraph.id=(`${policyId}-policy-heading`);
             createdDiv.appendChild(headingParagraph);
         
-            //Create and Add Policy Content
+            //Create and Add Policy Paragraph Content
             const contentParagraph = document.createElement('p');
-            contentParagraph.innerText = `${policyTable[selectedPolicyIndex].content}`;
+            contentParagraph.innerHTML = `${policyTable[selectedPolicyIndex].content}`;
                 //If there is an image URL, add that image
                 if(policyTable[selectedPolicyIndex].image_url!=null) {contentParagraph.innerHTML += `<img src="${policyTable[selectedPolicyIndex].image_url}" class="policy-image"/>`;}
             contentParagraph.classList.add('content');
