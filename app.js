@@ -84,6 +84,64 @@ dbConnection.connect((err) => {
     });
   });
 
+  //Create Routes
+  app.get('/policy/all_policies', (req, res) => {
+    console.log('all policies route hit');
+    dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/policy/employee_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/policy/family_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/policy/extracurricular_policies', (req, res) => {
+    dbConnection.query('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+  
+  app.get('/policy/headings', (req, res) => {
+    dbConnection.query('SELECT * FROM headings ORDER BY heading_id', (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/policy/board_pending', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/policy/admin_pending', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/policy/amended', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
 //Create Alternate Routes
   //Create Routes
   app.get('/all_policies', (req, res) => {
