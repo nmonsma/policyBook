@@ -26,8 +26,9 @@ dbConnection.connect((err) => {
     console.log('connected to database');
   });
   
+
   //Create Routes
-  app.get('/epcspolicy/all_policies', (req, res) => {
+  app.get('/policy/all_policies', (req, res) => {
     console.log('all policies route hit');
     dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
       if (err) throw err;
@@ -35,107 +36,49 @@ dbConnection.connect((err) => {
     });
   });
   
-  app.get('/epcspolicy/employee_policies', (req, res) => {
+  app.get('/policy/employee_policies', (req, res) => {
     dbConnection.query('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
   
-  app.get('/epcspolicy/family_policies', (req, res) => {
+  app.get('/policy/family_policies', (req, res) => {
     dbConnection.query('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
   
-  app.get('/epcspolicy/extracurricular_policies', (req, res) => {
+  app.get('/policy/extracurricular_policies', (req, res) => {
     dbConnection.query('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
   
-  app.get('/epcspolicy/headings', (req, res) => {
+  app.get('/policy/headings', (req, res) => {
     dbConnection.query('SELECT * FROM headings ORDER BY heading_id', (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
 
-  app.get('/epcspolicy/board_pending', (req, res) => {
+  app.get('/policy/board_pending', (req, res) => {
     dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
 
-  app.get('/epcspolicy/admin_pending', (req, res) => {
+  app.get('/policy/admin_pending', (req, res) => {
     dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
 
-  app.get('/epcspolicy/amended', (req, res) => {
-    dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-
-  //Create Routes
-  app.get('/policybook/all_policies', (req, res) => {
-    console.log('all policies route hit');
-    dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-  
-  app.get('/policybook/employee_policies', (req, res) => {
-    dbConnection.query('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-  
-  app.get('/policybook/family_policies', (req, res) => {
-    dbConnection.query('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-  
-  app.get('/policybook/extracurricular_policies', (req, res) => {
-    dbConnection.query('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-  
-  app.get('/policybook/headings', (req, res) => {
-    dbConnection.query('SELECT * FROM headings ORDER BY heading_id', (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-
-  app.get('/policybook/board_pending', (req, res) => {
-    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-
-  app.get('/policybook/admin_pending', (req, res) => {
-    dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
-      if (err) throw err;
-      res.json(result);
-    });
-  });
-
-  app.get('/policybook/amended', (req, res) => {
+  app.get('/policy/amended', (req, res) => {
     dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
@@ -207,7 +150,7 @@ dbConnection.connect((err) => {
 //   });
 
 /*Spin up the Server*/
-app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
+app.use('/policy', express.static(path.join(__dirname, 'public')));
 
 // Listen on port 3000
 //change this to process.env.PORT for production
