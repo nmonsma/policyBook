@@ -77,12 +77,21 @@ dbConnection.connect((err) => {
     });
   });
 
+  app.get('/epcspolicy/approved', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'aprroved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
   app.get('/epcspolicy/amended', (req, res) => {
     dbConnection.query("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });
   });
+
+
 
 //Create Alternate Routes
   //Create Routes
@@ -131,6 +140,13 @@ dbConnection.connect((err) => {
 
   app.get('/admin_pending', (req, res) => {
     dbConnection.query("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  });
+
+  app.get('/approved', (req, res) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'aprroved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });

@@ -13,6 +13,7 @@ const handbookAssociations = [
     {"dropdown": "Employee Handbook", "route": "employee_policies"},
     {"dropdown": "Family Handbook", "route": "family_policies"},
     {"dropdown": "Extracurricular Handbook", "route": "extracurricular_policies"},
+    {"dropdown": "All Approved", "route": "approved"},
     {"dropdown": "Amended", "route": "amended"},
     {"dropdown": "Board Action Needed", "route": "board_pending"},
     {"dropdown": "Admin Action Needed", "route": "admin_pending"},
