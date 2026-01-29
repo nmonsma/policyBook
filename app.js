@@ -81,6 +81,7 @@ dbConnection.connect((err) => {
     dbConnection.query("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
+      console.log('approved route hit', result);
     });
   });
 
