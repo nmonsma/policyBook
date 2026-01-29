@@ -146,7 +146,7 @@ dbConnection.connect((err) => {
   });
 
   app.get('/approved', (req, res) => {
-    dbConnection.query("SELECT * FROM policies WHERE status = 'aprroved' ORDER BY policy_number", (err, result) => {
+    dbConnection.query("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", (err, result) => {
       if (err) throw err;
       res.json(result);
     });
