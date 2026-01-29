@@ -22,9 +22,9 @@ const loadPolicyTable = async (route)=> {
         const request = await fetch(route); //Get the table json from the specified route.
         console.log(request); //Log the request for debugging
         const policyTable = await request.json(); //Convert the response to JSON
+        console.log(policyTable); //Log the policyTable for debugging
 
         const request2 = await fetch('headings'); //Get the headings json from the specified route.
-        console.log(request2); //Log the request for debugging
         const headings = await request2.json(); //Convert the response to JSON
 
         //End the Loading Animation
