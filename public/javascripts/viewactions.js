@@ -1,7 +1,7 @@
 //Associate form options with classes
 const formAssociations = [
-    {"checkbox": "areas-checkbox",          "cssClass": "area-title"},
-    {"checkbox": "sections-checkbox",       "cssClass": "section-title"},
+    // {"checkbox": "areas-checkbox",          "cssClass": "area-title"},
+    // {"checkbox": "sections-checkbox",       "cssClass": "section-title"},
     {"checkbox": "policy-numbers-checkbox", "cssClass": "policy-number"},
     {"checkbox": "handbooks-checkbox",      "cssClass": "policy-handbook"},
     {"checkbox": "content-checkbox",        "cssClass": "content"},

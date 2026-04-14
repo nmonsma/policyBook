@@ -175,16 +175,14 @@ dbConnection.connect((err) => {
     });
   });
 
-// //Route for namecheap shared hosting deployment
-//   app.get('/epcspolicy', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'public', 'index.html'))
-//   });
 
 /*Spin up the Server*/
 app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
 
-// Listen on port 3000
-//change this to process.env.PORT for production
+//use for local testing only:
+// app.use('/', express.static(path.join(__dirname, 'public')));
+
+// Listen on port 3000/process.env.PORT
 app.listen(process.env.PORT, function () {
     console.log('listening')
     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));

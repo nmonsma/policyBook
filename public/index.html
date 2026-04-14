@@ -15,7 +15,7 @@
     <header>
         <div id="top-row"><h1 id="app-title">Policy Repository</h1></div>
         <div id="bottom-row">
-            <div id="subscriber"><img src="images/logo-color-small.png" height="25px"><h2>East Palmyra Christian School</h2></div>
+            <div id="subscriber"><img id="subscriber-logo" src="images/logo-color-small.png" height="25px"><span id="subscriber-name">East Palmyra Christian School</span></div>
             <div class="menu"><form onsubmit="return false" id="handbook-selector-form">
                 <span id="handbook-selector-label"><span>Policies</span></span>
                 <select id="handbook-selector"></select>
@@ -24,14 +24,14 @@
             <div class="menu dropdown">
                 <button class="dropdown-button">Display Options</button>
                 <form id="view-options" onsubmit="false">
-                    <div class="view-option">
+                    <!-- <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="areas-checkbox" name="areas-checkbox" checked>
                         <label for="areas-checkbox">Area Headings</label>
                     </div>
                     <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="sections-checkbox" name="sections-checkbox" checked>
                         <label for="sections-checkbox">Section Headings</label>
-                    </div>
+                    </div> -->
                     <div class="view-option">
                         <input class="sidebar-checkbox" type="checkbox" id="policy-numbers-checkbox" name="policy-numbers-checkbox" checked>
                         <label for="policy-numbers-checkbox">Policy Numbers</label>
@@ -53,8 +53,7 @@
             </div>
         </div>
     </header>
-    <div id="sidebar">
-        
+       
     </div>
  <!-- Spinners (uncomment to use) -->
         <div id="loading-container">
@@ -98,10 +97,12 @@
          -->        
 
     </main>
+    <div id="sidebar"></div>
     </body>
     <script>
 
 </script>
+<script src="javascripts/sample.js"></script>
 <script src="javascripts/loadactions.js"></script>
 <script src="javascripts/viewactions.js"></script>
 </html>

@@ -1,5 +1,4 @@
 //Constants and Variables
-let policyTable = [];
 
 //Fetch Requests
 //Load Policy Table
@@ -16,21 +15,14 @@ const loadPolicyTable = async (route)=> {
     main.textContent = '';
     sidebar.textContent = '';
     //Reset current area and section
-    currentArea = 0;
-    currentSection = 0;
+    let currentAreaDiv = {};
+    let currentSectionDiv = {};
     try {
         /*Online Routes*/
         const request = await fetch(route); //Get the table json from the specified route.
         const policyTable = await request.json(); //Convert the response to JSON
         const request2 = await fetch('headings'); //Get the headings json from the specified route.
         const headings = await request2.json(); //Convert the response to JSON
-
-        /*Offline Routes*/
-        // const policyTable = 
-        // const headings =
-        
-        console.log(policyTable); //Log the policyTable for debugging
-        console.log(headings); //Log the headings for debugging
 
         //End the Loading Animation
         document.getElementById('loading-container').classList.add('hidden');
@@ -39,7 +31,7 @@ const loadPolicyTable = async (route)=> {
             
         //New Area
             //If the policy in a new area, add an area header and add to the TOC sidebar
-            if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentArea) {
+            if(Math.floor(policyTable[selectedPolicyIndex].section_number/1000) != currentAreaDiv.id) {
                 currentArea = Math.floor(policyTable[selectedPolicyIndex].section_number/1000);
                 
                 //Get the area title from the headings table
@@ -50,35 +42,45 @@ const loadPolicyTable = async (route)=> {
                     console.log("error", error);
                     areaTitle = "[Title Not Found]";
                 }
-                
 
-                //Create Area Header
+                //Create Area Div
                 const createdAreaDiv = document.createElement('div');
+                createdAreaDiv.classList.add('divider');
                 createdAreaDiv.id = `${currentArea}`;
                 
-                //Add content from policyTable:
-                const createdNumberSpan = document.createElement('span');
-                const createdTitleSpan = document.createElement('span');
-                createdNumberSpan.innerText = `${currentArea}`;
-                createdNumberSpan.classList.add('policy-number');
-                
-                createdTitleSpan.innerText = `${areaTitle}`;          
-                
-                createdAreaDiv.appendChild(createdNumberSpan);
-                createdAreaDiv.appendChild(createdTitleSpan);      
-                createdAreaDiv.classList.add('divider', 'area-title');
-                main.appendChild(createdAreaDiv); 
+                    //Create Header
+                    const createdHeader = document.createElement('h2');
+
+                        //Add content from policyTable:
+                        const createdNumberSpan = document.createElement('span');
+                        const createdTitleSpan = document.createElement('span');
+                        createdNumberSpan.innerText = `${currentArea}`;
+                        createdNumberSpan.classList.add('policy-number');
+                        
+                        createdTitleSpan.innerText = `${areaTitle}`;          
+                        
+                        createdHeader.appendChild(createdNumberSpan);
+                        createdHeader.appendChild(createdTitleSpan);      
+                        createdHeader.classList.add('sticky', 'area-title');
+                    
+                    createdAreaDiv.appendChild(createdHeader);
+
+                //Set as current area and append to main
+                currentAreaDiv = createdAreaDiv;
+                main.appendChild(createdAreaDiv);
 
                 //Add to the sidebar
                 const createdSidebarP = document.createElement('p');
                 createdSidebarP.innerHTML = `<a href="#${createdNumberSpan.innerText}">${createdNumberSpan.innerText} ${createdTitleSpan.innerText}`;
                 createdSidebarP.classList.add('sidebar-item');
                 sidebar.appendChild(createdSidebarP); //Add to the sidebar                
+
             }
+
 
         //New Section
             //If new section, add section header and add to the TOC sidebar
-            if(policyTable[selectedPolicyIndex].section_number != currentSection) {
+            if(policyTable[selectedPolicyIndex].section_number != currentSectionDiv.id) {
                 currentSection = policyTable[selectedPolicyIndex].section_number;
                 
                 //Get the section title from the headings table
@@ -89,30 +91,41 @@ const loadPolicyTable = async (route)=> {
                     console.log("error", error);
                     sectionTitle = "[Title Not Found]";
                 }               
-                //Create Section Header
-                const createdSectionDiv = document.createElement('div');
-                createdSectionDiv.id = `${currentSection}`;
- 
-                //Add content from policyTable
-                const createdNumberSpan = document.createElement('span');
-                const createdTitleSpan = document.createElement('span');
-                createdNumberSpan.innerText = `${currentSection}`;
-                createdNumberSpan.classList.add('policy-number');
 
-                createdTitleSpan.innerText = `${sectionTitle}`;
-                
-                createdSectionDiv.appendChild(createdNumberSpan);
-                createdSectionDiv.appendChild(createdTitleSpan);      
+                //Create Area Div
+                const createdSectionDiv = document.createElement('div');
+                createdSectionDiv.classList.add('section-divider');
+                createdSectionDiv.id = `${currentSection}`;
+
+                    //Create Section Header
+                    const createdSectionHeader = document.createElement('h3');
     
-                createdSectionDiv.classList.add('divider', 'section-title');
-                main.appendChild(createdSectionDiv);
+                        //Add content from policyTable
+                        const createdNumberSpan = document.createElement('span');
+                        const createdTitleSpan = document.createElement('span');
+                        createdNumberSpan.innerText = `${currentSection}`;
+                        createdNumberSpan.classList.add('policy-number');
+
+                        createdTitleSpan.innerText = `${sectionTitle}`;
+                        
+                        createdSectionHeader.appendChild(createdNumberSpan);
+                        createdSectionHeader.appendChild(createdTitleSpan);      
+            
+                        createdSectionHeader.classList.add('divider', 'section-title');
+                        createdSectionDiv.appendChild(createdSectionHeader);
               
+               //Set as current section and append to current area
+               currentSectionDiv = createdSectionDiv;
+               currentAreaDiv.appendChild(createdSectionDiv);
+
                 //Add to the sidebar
                 const createdSidebarP = document.createElement('p');
                 createdSidebarP.innerHTML = `<a href="#${createdNumberSpan.innerText}">${createdNumberSpan.innerText} ${createdTitleSpan.innerText}`;
                 createdSidebarP.classList.add('sidebar-item');
                 createdSidebarP.classList.add('section-toc-entry');
                 sidebar.appendChild(createdSidebarP); //Add to the sidebar                
+
+
 
             }
 
@@ -167,7 +180,7 @@ const loadPolicyTable = async (route)=> {
                 handbookSpan.id=(`${policyId}-handbooks`);
                 headingParagraph.appendChild(handbookSpan);
         
-            headingParagraph.classList.add('heading');
+            headingParagraph.classList.add('heading', 'sticky');
             headingParagraph.id=(`${policyId}-policy-heading`);
             createdDiv.appendChild(headingParagraph);
         
@@ -193,7 +206,7 @@ const loadPolicyTable = async (route)=> {
             createdDiv.appendChild(footerParagraph);
         
             //Add Div to main
-            main.appendChild(createdDiv); 
+            currentSectionDiv.appendChild(createdDiv); 
 
             createdDiv.classList.add('policy', `status-${policyTable[selectedPolicyIndex].status}`);
 
