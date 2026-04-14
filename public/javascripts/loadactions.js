@@ -210,6 +210,6 @@ const loadPolicyTable = async (route)=> {
 }
 
 //Update policyTable
-loadPolicyTable('all_policies');
+loadPolicyTable('all_policies?filter=all');
 //Iterate through rows
 
