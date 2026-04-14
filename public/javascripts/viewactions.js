@@ -9,7 +9,9 @@ const formAssociations = [
 ]
 
 const handbookAssociations = [
-    {"dropdown": "All", "route": "all_policies"},
+    {"dropdown": "All", "route": "all_policies?filter=all"},
+    {"dropdown": "Board Policies", "route": "all_policies?filter=board"},
+    {"dropdown": "Administration Policies", "route": "all_policies?filter=admin"},
     {"dropdown": "Employee Handbook", "route": "employee_policies"},
     {"dropdown": "Family Handbook", "route": "family_policies"},
     {"dropdown": "Extracurricular Handbook", "route": "extracurricular_policies"},
