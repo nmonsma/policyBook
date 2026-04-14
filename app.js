@@ -26,7 +26,7 @@ app.use(express.json());
 
 console.log('App started at:', new Date().toLocaleString());
 
-//MySQL Setup
+// //MySQL Setup
 const mysql = require('mysql2');
 const dbConnection = mysql.createConnection({
   host: credentials.host,
@@ -176,17 +176,19 @@ dbConnection.connect((err) => {
   });
 
 
-/*Spin up the Server*/
+/*Spin up the Server for online use*/
 app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
-
-//use for local testing only:
-// app.use('/', express.static(path.join(__dirname, 'public')));
-
-// Listen on port 3000/process.env.PORT
 app.listen(process.env.PORT, function () {
     console.log('listening')
     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 })
+
+/*Spin up the Server for local use*/
+// app.use('/', express.static(path.join(__dirname, 'public')));
+// app.listen(3000, function () {
+//     console.log('listening')
+//     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
+// })
 
 
 

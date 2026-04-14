@@ -70,6 +70,7 @@ h1, h2, h3, h4 {
 #main {
     position: relative;
     padding: 0 0 30px 0;
+    scroll-padding-top: 28px;
     top: var(--content-top);
     left: 280px;
     overflow-y: auto;
