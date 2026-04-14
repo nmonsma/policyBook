@@ -19,13 +19,18 @@ const loadPolicyTable = async (route)=> {
     currentArea = 0;
     currentSection = 0;
     try {
+        /*Online Routes*/
         const request = await fetch(route); //Get the table json from the specified route.
-        console.log(request); //Log the request for debugging
         const policyTable = await request.json(); //Convert the response to JSON
-        console.log(policyTable); //Log the policyTable for debugging
-
         const request2 = await fetch('headings'); //Get the headings json from the specified route.
         const headings = await request2.json(); //Convert the response to JSON
+
+        /*Offline Routes*/
+        // const policyTable = 
+        // const headings =
+        
+        console.log(policyTable); //Log the policyTable for debugging
+        console.log(headings); //Log the headings for debugging
 
         //End the Loading Animation
         document.getElementById('loading-container').classList.add('hidden');
