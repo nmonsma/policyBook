@@ -3,15 +3,6 @@ main span {
   margin: 0;
 }
 
-.divider, .policy {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.divider {
-  background-color: var(--color1);
-}
-
 .section-divider {
   margin-left: 25px;
 }
@@ -19,7 +10,7 @@ main span {
 .area-title {
   background-color: var(--color1);
   padding: 15px;
-  margin-bottom: 15px;
+  margin-bottom: -64px;
   border-top: 5px solid var(--dark);
   position: sticky;
   top: 0;
@@ -34,7 +25,7 @@ main span {
 .section-title {
   background-color: var(--color1);
   padding: 15px;
-  margin-bottom: 15px;
+  margin: 64px 0 -64px 0;
   border-top: 5px solid var(--dark);
   position: sticky;
   top: 64px;
@@ -42,7 +33,7 @@ main span {
 }
 
 .policy {
-  margin-left: 25px;
+  margin: 64px 0 -35px 25px;
   max-width: 800px;
   padding: 0;
   /* border-radius: 25px; */
