@@ -101,8 +101,12 @@ console.log('App started at:', new Date().toLocaleString());
 //Create Alternate Routes
   //Create Routes
   app.get('/all_policies', (req, res) => {
-    console.log('all policies route hit without prefix');
-    dbConnection.query('SELECT * FROM policies ORDER BY policy_number', (err, result) => {
+    delete require.cache[require.resolve('./sqlkeys.js')];
+    const POLICY_QUERIES = require('./sqlkeys.js');
+    
+    const sql = POLICY_QUERIES[req.query.filter];
+    if (!sql) return res.status(400).json({ error: 'Invalid query key' });
+    dbConnection.query(sql, (err, result) => {
       if (err) throw err;
       res.json(result);
     });
