@@ -19,10 +19,10 @@ const loadPolicyTable = async (route)=> {
     let currentSectionDiv = {};
     try {
         /*Online Routes*/
-        const request = await fetch(route); //Get the table json from the specified route.
-        const policyTable = await request.json(); //Convert the response to JSON
-        const request2 = await fetch('headings'); //Get the headings json from the specified route.
-        const headings = await request2.json(); //Convert the response to JSON
+        // const request = await fetch(route); //Get the table json from the specified route.
+        // const policyTable = await request.json(); //Convert the response to JSON
+        // const request2 = await fetch('headings'); //Get the headings json from the specified route.
+        // const headings = await request2.json(); //Convert the response to JSON
 
         //End the Loading Animation
         document.getElementById('loading-container').classList.add('hidden');

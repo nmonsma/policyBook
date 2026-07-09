@@ -1,6 +1,11 @@
 /*Query Constants*/
 const POLICY_QUERIES = {
-  all:             'SELECT * FROM policies ORDER BY policy_number',
+  all:             `
+    SELECT p.*, ps.policy_number, ps.original_title
+    FROM policy_series ps
+    JOIN policies p ON p.policy_id = ps.current_policy_id
+    ORDER BY ps.policy_number
+  `,
   employee:        'SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number',
   family:          'SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number',
   extracurricular: 'SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number',
@@ -11,6 +16,8 @@ const POLICY_QUERIES = {
   admin_pending:   "SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number",
   approved:        "SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number",
   amended:         "SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number",
+  all_nonrelational_deprecated:             'SELECT * FROM policies ORDER BY policy_number',
+
 };
 
 /*Express and other requires*/
@@ -27,19 +34,17 @@ app.use(express.json());
 console.log('App started at:', new Date().toLocaleString());
 
 // //MySQL Setup
-const mysql = require('mysql2');
-const dbConnection = mysql.createConnection({
-  host: credentials.host,
-  user: credentials.user,
-  password: credentials.password,
-  database: credentials.database
-});
-
-//Connect to MySQL
-dbConnection.connect((err) => {
-    if (err) throw err;
-    console.log('connected to database');
-  });
+// const mysql = require('mysql2');
+// const dbConnection = mysql.createConnection({
+//   host: credentials.host,
+//   user: credentials.user,
+//   password: credentials.password,
+//   database: credentials.database
+// });
+// dbConnection.connect((err) => {
+//     if (err) throw err;
+//     console.log('connected to database');
+//   });
   
   //Create Routes
   app.get('/epcspolicy/all_policies', (req, res) => {
@@ -177,18 +182,18 @@ dbConnection.connect((err) => {
 
 
 /*Spin up the Server for online use*/
-app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
-app.listen(process.env.PORT, function () {
-    console.log('listening')
-    console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
-})
-
-/*Spin up the Server for local use*/
-// app.use('/', express.static(path.join(__dirname, 'public')));
-// app.listen(3000, function () {
+// app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
+// app.listen(process.env.PORT, function () {
 //     console.log('listening')
 //     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 // })
+
+/*Spin up the Server for local use*/
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.listen(3000, function () {
+    console.log('listening')
+    console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
+})
 
 
 
