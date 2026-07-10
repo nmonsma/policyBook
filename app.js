@@ -14,18 +14,18 @@ app.use(express.json());
 
 console.log('App started at:', new Date().toLocaleString());
 
-// //MySQL Setup
-// const mysql = require('mysql2');
-// const dbConnection = mysql.createConnection({
-//   host: credentials.host,
-//   user: credentials.user,
-//   password: credentials.password,
-//   database: credentials.database
-// });
-// dbConnection.connect((err) => {
-//     if (err) throw err;
-//     console.log('connected to database');
-//   });
+//MySQL Setup
+const mysql = require('mysql2');
+const dbConnection = mysql.createConnection({
+  host: credentials.host,
+  user: credentials.user,
+  password: credentials.password,
+  database: credentials.database
+});
+dbConnection.connect((err) => {
+    if (err) throw err;
+    console.log('connected to database');
+  });
   
   //Create Routes
   app.get('/epcspolicy/all_policies', (req, res) => {
@@ -172,7 +172,7 @@ console.log('App started at:', new Date().toLocaleString());
 /*Spin up the Server for online use*/
 app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
 app.listen(process.env.PORT, function () {
-    console.log('listening')
+    console.log('listening on port', process.env.PORT);
     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 })
 
