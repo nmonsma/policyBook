@@ -170,18 +170,18 @@ console.log('App started at:', new Date().toLocaleString());
 
 
 /*Spin up the Server for online use*/
-// app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
-// app.listen(process.env.PORT, function () {
-//     console.log('listening')
-//     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
-// })
-
-/*Spin up the Server for local use*/
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.listen(3000, function () {
+app.use('/epcspolicy', express.static(path.join(__dirname, 'public')));
+app.listen(process.env.PORT, function () {
     console.log('listening')
     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
 })
+
+/*Spin up the Server for local use*/
+// app.use('/', express.static(path.join(__dirname, 'public')));
+// app.listen(3000, function () {
+//     console.log('listening')
+//     console.log('Routes registered:', app._router.stack.filter(r => r.route).map(r => r.route.path));
+// })
 
 
 
