@@ -121,7 +121,7 @@ main span {
   }
   
   .approval {
-    padding: 0;
+    padding: 15px;
     margin: 0;
     font-size: 0.8em;
     grid-area: approval;
