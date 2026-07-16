@@ -1,0 +1,104 @@
+@page {
+    size: 8.5in 11in; /* Half letter size */
+    margin: 1.5cm; /* Adjust as needed */
+
+@bottom-center {
+    content: counter(page) "/" counter(pages);
+}
+}
+
+body, h1, h2, h3, h4, #sidebar, .section-toc-entry, #main, main span, .section-divider, .area-title, .h2, .section-title, .policy, .heading, .policy-title, .content, .status-approved, .board-policy {
+    all: unset;
+    display: block;
+    position: relative !important;
+    box-shadow: none !important;
+    color: black !important;
+    text-decoration: none !important;
+    margin: 0;
+    padding: 0 !important;
+    top: auto !important;
+    left: auto !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: visible !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    font-size: 12pt;
+    border: none;
+}
+
+style, link, script, title, meta, header, footer, nav, aside, #sidebar, .dropdown, #subscriber-name {
+    display: none !important;
+}
+
+main {
+    column-count: 2 !important;
+    column-gap: 1.5cm !important;
+}
+
+h2, h3, h4, h5, h6 {
+    margin-top: 1em !important;
+    break-after: avoid !important;
+}
+
+.area-title .policy-number, .section-title .policy-number {
+    display: none !important;
+}
+
+
+
+.area-title {
+    color: white !important;
+    background-color: black !important;
+    print-color-adjust: exact !important;
+}
+
+.area-title span {
+    color: white !important;
+    font-size: 1.5em !important;
+    font-weight: bold !important;
+}
+
+.section-title span {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    border-top: 2px solid black !important;
+}
+
+h4 {
+    font-size: 1em !important;
+    font-weight: bold !important;
+}
+
+.heading {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: left !important; 
+}
+
+.heading .policy-number {
+    color: gray !important;
+    font-weight: normal !important;
+    font-size: 0.7em !important;
+}
+
+.policy-handbook {
+    width: auto !important;
+    text-align: right !important;
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.content {
+    margin-left: 1em !important;
+}
+
+p {
+    orphans: 3 !important;
+    widows: 3 !important;  
+    text-indent: 1em each-line !important;
+}
+
+ul, ol {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}

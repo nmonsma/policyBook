@@ -227,12 +227,12 @@ const loadPolicyTable = async (route)=> {
 loadPolicyTable('all_policies?filter=all');
 //Iterate through rows
 
-const loadHistory = async (policyId) => {
-    //Start the Loading Animation
-    document.getElementById('loading-container').classList.remove('hidden');
+// const loadHistory = async (policyId) => {
+//     //Start the Loading Animation
+//     document.getElementById('loading-container').classList.remove('hidden');
 
-    try {
-        const request = await fetch(`history?policyId=${policyId}`);
-        const historyTable = await request.json();
-    }
-}
+//     try {
+//         const request = await fetch(`history?policyId=${policyId}`);
+//         const historyTable = await request.json();
+//     }
+// }

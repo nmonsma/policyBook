@@ -92,39 +92,3 @@ h1, h2, h3, h4 {
   }
 
 }
-
-@media print {
-  @page {
-    size: 8.5in 11in; /* Standard letter size */
-    margin: 2cm; /* Adjust as needed */
-  }
-
-  body {
-    background-color: white;
-    color: black;
-  }
-
-  #sidebar, header {
-    display: none;
-  }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }  
-  
-  #main {
-        position: static;
-        float: none;
-        padding: 0;
-        width: 100%;
-        max-height: none;
-        left: 0;
-    }
-    .section-title, .heading {
-        position: static;
-        top: auto;
-    }
-}
