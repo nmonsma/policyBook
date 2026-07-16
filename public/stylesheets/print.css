@@ -95,6 +95,9 @@ h4 {
 p {
     orphans: 3 !important;
     widows: 3 !important;  
+}
+
+p:not(.ul), p:not(.ol) {
     text-indent: 1em each-line !important;
 }
 
