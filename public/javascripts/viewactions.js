@@ -12,13 +12,13 @@ const handbookAssociations = [
     {"dropdown": "All", "route": "all_policies?filter=all"},
     {"dropdown": "Board Policies", "route": "all_policies?filter=board"},
     {"dropdown": "Administration Policies", "route": "all_policies?filter=admin"},
-    {"dropdown": "Employee Handbook", "route": "employee_policies"},
-    {"dropdown": "Family Handbook", "route": "family_policies"},
-    {"dropdown": "Extracurricular Handbook", "route": "extracurricular_policies"},
-    {"dropdown": "All Approved", "route": "approved"},
-    {"dropdown": "Amended", "route": "amended"},
-    {"dropdown": "Board Action Needed", "route": "board_pending"},
-    {"dropdown": "Admin Action Needed", "route": "admin_pending"},
+    {"dropdown": "Employee Handbook", "route": "all_policies?filter=employee"},
+    {"dropdown": "Family Handbook", "route": "all_policies?filter=family"},
+    {"dropdown": "Extracurricular Handbook", "route": "all_policies?filter=extracurricular"},
+    {"dropdown": "All Approved", "route": "all_policies?filter=approved"},
+    {"dropdown": "Amended", "route": "all_policies?filter=amended"},
+    {"dropdown": "Board Action Needed", "route": "all_policies?filter=board_pending"},
+    {"dropdown": "Admin Action Needed", "route": "all_policies?filter=admin_pending"},
 ]
 
 

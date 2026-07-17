@@ -2,7 +2,9 @@
 
 /*Express and other requires*/
 var path = require('path');
-const POLICY_QUERIES = require('./sqlkeys.js');
+let POLICY_QUERIES = require('./sqlkeys.js');
+// For using the db stored routes:
+// let POLICY_QUERIES = {};
 const express = require('express');
 const app = express();
 const credentials = require('./credentials.js');
@@ -14,6 +16,8 @@ app.use(express.json());
 
 console.log('App started at:', new Date().toLocaleString());
 
+
+/*Claude Helped with this code below, but I need to check it for accuracy and security.*/
 //MySQL Setup - connection pool instead of a single connection.
 //A pool automatically opens a fresh connection whenever one has gone
 //stale/dropped, instead of permanently failing until the process restarts.
@@ -89,126 +93,164 @@ function safeQuery(sql, res, callback) {
   }
 }
 
+
+/* Return to my code */
+//Set up a query function that returns a promise, so we can use async/await syntax.
+function query(sql, params = []) {
+  return new Promise((resolve, reject) => {
+    dbConnection.query(sql, params, (err, result) => {
+      if (err) reject(err);
+      else resolve(result);
+    });
+  });
+}
+
+//Function to load query keys from the database and store them in POLICY_QUERIES
+async function loadQueryKeys() {
+  const rows = await query('SELECT key_name, sql_query FROM query_keys WHERE active = 1');
+  const POLICY_QUERIES = {};
+  rows.forEach(row => {
+    POLICY_QUERIES[row.key_name] = row.sql_query;
+  });
+  return POLICY_QUERIES;
+}
+
+// load once at startup
+loadQueryKeys();
+
 //Create Routes
-app.get('/epcspolicy/all_policies', (req, res) => {
-  delete require.cache[require.resolve('./sqlkeys.js')];
-  const POLICY_QUERIES = require('./sqlkeys.js');
+app.get('/epcspolicy', async (req, res) => {
+  try {
+    const POLICY_QUERIES = await loadQueryKeys();
+    const sql = POLICY_QUERIES[req.query.filter];
+    if (!sql) return res.status(400).json({ error: 'Invalid query key' });
 
-  const sql = POLICY_QUERIES[req.query.filter];
-  if (!sql) return res.status(400).json({ error: 'Invalid query key' });
-  safeQuery(sql, res, (result) => {
+    const result = await query(sql);
     res.json(result);
-  });
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
 });
 
-app.get('/epcspolicy/employee_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
+app.get('/epcspolicy/menus', (req, res) => {
+  dbConnection.query(
+    'SELECT title, route FROM query_keys WHERE active = 1 ORDER BY id',
+    (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    }
+  );
 });
 
-app.get('/epcspolicy/family_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/employee_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/extracurricular_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/family_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/headings', (req, res) => {
-  safeQuery('SELECT * FROM headings ORDER BY heading_id', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/extracurricular_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/board_pending', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/headings', (req, res) => {
+//   safeQuery('SELECT * FROM headings ORDER BY heading_id', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/admin_pending', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/board_pending', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/approved', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/admin_pending', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/epcspolicy/amended', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/epcspolicy/approved', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
+
+// app.get('/epcspolicy/amended', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
 
-//Create Alternate Routes
-app.get('/all_policies', (req, res) => {
-  delete require.cache[require.resolve('./sqlkeys.js')];
-  const POLICY_QUERIES = require('./sqlkeys.js');
+// //Create Alternate Routes
+// app.get('/all_policies', (req, res) => {
+//   delete require.cache[require.resolve('./sqlkeys.js')];
+//   const POLICY_QUERIES = require('./sqlkeys.js');
 
-  const sql = POLICY_QUERIES[req.query.filter];
-  if (!sql) return res.status(400).json({ error: 'Invalid query key' });
-  safeQuery(sql, res, (result) => {
-    res.json(result);
-  });
-});
+//   const sql = POLICY_QUERIES[req.query.filter];
+//   if (!sql) return res.status(400).json({ error: 'Invalid query key' });
+//   safeQuery(sql, res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/employee_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/employee_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_e = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/family_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/family_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_f = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/extracurricular_policies', (req, res) => {
-  safeQuery('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/extracurricular_policies', (req, res) => {
+//   safeQuery('SELECT * FROM policies WHERE handbook_x = 1 ORDER BY policy_number', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/headings', (req, res) => {
-  safeQuery('SELECT * FROM headings ORDER BY heading_id', res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/headings', (req, res) => {
+//   safeQuery('SELECT * FROM headings ORDER BY heading_id', res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/board_pending', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/board_pending', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%board%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/admin_pending', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/admin_pending', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE LOWER(entity) LIKE '%admin%' AND NOT status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/approved', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/approved', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE status = 'approved' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
-app.get('/amended', (req, res) => {
-  safeQuery("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", res, (result) => {
-    res.json(result);
-  });
-});
+// app.get('/amended', (req, res) => {
+//   safeQuery("SELECT * FROM policies WHERE status = 'amended' ORDER BY policy_number", res, (result) => {
+//     res.json(result);
+//   });
+// });
 
 //Catch-all handler for anything that slips through unhandled (belt-and-braces
 //so a bug elsewhere can't crash the whole process and take every route down).
