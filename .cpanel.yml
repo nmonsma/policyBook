@@ -2,6 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/nickjufg/nodejs
-    - /bin/cp -R /home/nickjufg/repositories/devPolicyBook $DEPLOYPATH
-    - /bin/rm -rf $DEPLOYPATH/devPolicyBook/.git
-    - /bin/rm -rf $DEPLOYPATH/devPolicyBook/.gitignore
+    - /bin/cp -R /home/nickjufg/repositories/PolicyBook $DEPLOYPATH
+    - /bin/rm -rf $DEPLOYPATH/PolicyBook/.git
+    - /bin/rm -rf $DEPLOYPATH/PolicyBook/.gitignore
